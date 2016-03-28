@@ -3,13 +3,11 @@ package nl.lakedigital.djfc.client.oga;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonAdres;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class AdresClient extends AbstractClient<JsonAdres> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/adres/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/adres/opslaan";

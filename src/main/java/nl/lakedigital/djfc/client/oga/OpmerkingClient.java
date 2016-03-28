@@ -5,13 +5,11 @@ import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonOpmerking;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class OpmerkingClient extends AbstractClient<JsonOpmerking> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/opmerking/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/opmerking/opslaan";
