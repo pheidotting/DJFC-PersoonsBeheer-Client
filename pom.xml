@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nl.lakedigital.djfc</groupId>
-    <artifactId>djfc-persoonsbeheer-client</artifactId>
+    <artifactId>djfc-clients</artifactId>
     <version>4.0</version>
 
     <properties>
