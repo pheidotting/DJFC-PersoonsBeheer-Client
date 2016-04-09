@@ -12,11 +12,20 @@ public class BijlageClient extends AbstractClient<JsonBijlage> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/bijlage/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/bijlage/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/bijlage/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:7072/orga/rest/bijlage/zoeken";
 
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonBijlage>>() {
         }.getType();
+    }
+
+    @Override
+    public List<JsonBijlage> zoeken(String zoekterm) {
+
+        System.out.println("Aanroepen " + URL_ZOEKEN);
+
+        return uitvoerenGetLijst(URL_ZOEKEN, JsonBijlage.class, zoekterm);
     }
 
     @Override

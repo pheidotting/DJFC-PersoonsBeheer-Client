@@ -12,11 +12,20 @@ public class RekeningClient extends AbstractClient<JsonRekeningNummer> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/rekeningnummer/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/rekeningnummer/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/rekeningnummer/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:7072/orga/rest/rekeningnummer/zoeken";
 
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonRekeningNummer>>() {
         }.getType();
+    }
+
+    @Override
+    public List<JsonRekeningNummer> zoeken(String zoekterm) {
+
+        System.out.println("Aanroepen " + URL_ZOEKEN);
+
+        return uitvoerenGetLijst(URL_ZOEKEN, JsonRekeningNummer.class, zoekterm);
     }
 
     @Override

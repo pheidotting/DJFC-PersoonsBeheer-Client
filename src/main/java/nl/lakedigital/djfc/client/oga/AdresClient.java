@@ -13,11 +13,21 @@ public class AdresClient extends AbstractClient<JsonAdres> {
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/adres/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/adres/verwijderen";
     private final String URL_LEES = "http://localhost:7072/orga/rest/adres/lees";
+    private final String URL_ADRES_BIJ_POSTCODE = "http://localhost:7072/orga/rest/adres/ophalenAdresOpPostcode";
+    private final String URL_ZOEKEN = "http://localhost:7072/orga/rest/adres/zoeken";
 
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonAdres>>() {
         }.getType();
+    }
+
+    @Override
+    public List<JsonAdres> zoeken(String zoekterm) {
+
+        System.out.println("Aanroepen " + URL_ZOEKEN);
+
+        return uitvoerenGetLijst(URL_ZOEKEN, JsonAdres.class, zoekterm);
     }
 
     public JsonAdres lees(Long id) {
@@ -47,5 +57,9 @@ public class AdresClient extends AbstractClient<JsonAdres> {
         System.out.println("Aanroepen " + URL_VERWIJDEREN);
 
         aanroepenUrlPostZonderBody(URL_VERWIJDEREN, 5L, soortEntiteit, entiteitId.toString());
+    }
+
+    public JsonAdres ophalenAdresOpPostcode(String postcode, String huisnummer) {
+        return uitvoerenGet(URL_ADRES_BIJ_POSTCODE, JsonAdres.class, 9L, postcode, huisnummer);
     }
 }

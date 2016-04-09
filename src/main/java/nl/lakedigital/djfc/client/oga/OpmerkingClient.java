@@ -14,11 +14,20 @@ public class OpmerkingClient extends AbstractClient<JsonOpmerking> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/opmerking/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/opmerking/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/opmerking/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:7072/orga/rest/opmerking/zoeken";
 
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonOpmerking>>() {
         }.getType();
+    }
+
+    @Override
+    public List<JsonOpmerking> zoeken(String zoekterm) {
+
+        System.out.println("Aanroepen " + URL_ZOEKEN);
+
+        return uitvoerenGetLijst(URL_ZOEKEN, JsonOpmerking.class, zoekterm);
     }
 
     @Override

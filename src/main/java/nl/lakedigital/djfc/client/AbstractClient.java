@@ -28,6 +28,8 @@ public abstract class AbstractClient<T extends AbstracteJsonEntiteitMetSoortEnId
 
     public abstract void verwijder(String soortEntiteit, Long entiteitId);
 
+    public abstract List<T> zoeken(String zoekterm);
+
     protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker) {
         Gson gson = builder.create();
 

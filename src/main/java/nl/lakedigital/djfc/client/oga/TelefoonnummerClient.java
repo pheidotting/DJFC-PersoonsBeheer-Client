@@ -12,11 +12,20 @@ public class TelefoonnummerClient extends AbstractClient<JsonTelefoonnummer> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/telefoonnummer/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/telefoonnummer/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/telefoonnummer/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:7072/orga/rest/telefoonnummer/zoeken";
 
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonTelefoonnummer>>() {
         }.getType();
+    }
+
+    @Override
+    public List<JsonTelefoonnummer> zoeken(String zoekterm) {
+
+        System.out.println("Aanroepen " + URL_ZOEKEN);
+
+        return uitvoerenGetLijst(URL_ZOEKEN, JsonTelefoonnummer.class, zoekterm);
     }
 
     @Override
