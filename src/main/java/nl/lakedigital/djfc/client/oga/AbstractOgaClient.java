@@ -1,4 +1,4 @@
-package nl.lakedigital.djfc.client;
+package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,18 +8,28 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
+import nl.lakedigital.djfc.client.AbstractClient;
+import nl.lakedigital.djfc.commons.json.AbstracteJsonEntiteitMetSoortEnId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-public abstract class AbstractClient {
+public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortEnId> extends AbstractClient {
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractClient.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractOgaClient.class);
 
+
+    public abstract List<T> lijst(String soortEntiteit, Long entiteitId);
+
+    public abstract String opslaan(List<T> jsonAdressen);
+
+    public abstract void verwijder(String soortEntiteit, Long entiteitId);
+
+    public abstract List<T> zoeken(String zoekterm);
 
     protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker) {
         Gson gson = builder.create();

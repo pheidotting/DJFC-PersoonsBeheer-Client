@@ -1,14 +1,13 @@
 package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
-import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonBijlage;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BijlageClient extends AbstractClient<JsonBijlage> {
+public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/bijlage/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/bijlage/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/bijlage/verwijderen";

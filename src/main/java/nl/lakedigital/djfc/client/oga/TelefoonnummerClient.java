@@ -1,14 +1,13 @@
 package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
-import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelefoonnummerClient extends AbstractClient<JsonTelefoonnummer> {
+public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/telefoonnummer/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/telefoonnummer/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/telefoonnummer/verwijderen";

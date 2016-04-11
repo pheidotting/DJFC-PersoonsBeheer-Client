@@ -1,14 +1,13 @@
 package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
-import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RekeningClient extends AbstractClient<JsonRekeningNummer> {
+public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer> {
     private final String URL_LIJST = "http://localhost:7072/orga/rest/rekeningnummer/alles";
     private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/rekeningnummer/opslaan";
     private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/rekeningnummer/verwijderen";
