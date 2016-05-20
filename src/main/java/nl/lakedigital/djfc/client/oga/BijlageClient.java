@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
-    private final String URL_LIJST = "http://localhost:7072/orga/rest/bijlage/alles";
-    private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/bijlage/opslaan";
-    private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/bijlage/verwijderen";
-    private final String URL_ZOEKEN = "http://localhost:7072/orga/rest/bijlage/zoeken";
+    private final String URL_LIJST = "http://localhost:8081/orga/rest/bijlage/alles";
+    private final String URL_OPSLAAN = "http://localhost:8081/orga/rest/bijlage/opslaan";
+    private final String URL_OPSLAANEnkel = "http://localhost:8081/orga/rest/bijlage/opslaanBijlage";
+    private final String URL_VERWIJDEREN = "http://localhost:8081/orga/rest/bijlage/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:8081/orga/rest/bijlage/zoeken";
+    private final String URL_BESTANDSNAAM = "http://localhost:8081/orga/rest/bijlage/genereerBestandsnaam";
+    private final String URL_UPLOADPAD = "http://localhost:8081/orga/rest/bijlage/getUploadPad";
 
     @Override
     protected Type getTypeToken() {
@@ -36,11 +39,18 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
     }
 
     @Override
-    public String opslaan(List<JsonBijlage> jsonAdressen) {
+    public String opslaan(List<JsonBijlage> bijlages) {
 
         System.out.println("Aanroepen " + URL_OPSLAAN);
 
-        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, 5L);
+        return aanroepenUrlPost(URL_OPSLAAN, bijlages, 5L);
+    }
+
+    public String opslaan(JsonBijlage bijlage) {
+
+        System.out.println("Aanroepen " + URL_OPSLAAN);
+
+        return aanroepenUrlPost(URL_OPSLAAN, bijlage, 5L);
     }
 
     @Override
@@ -49,6 +59,13 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
         System.out.println("Aanroepen " + URL_VERWIJDEREN);
 
         aanroepenUrlPostZonderBody(URL_VERWIJDEREN, 5L, soortEntiteit, entiteitId.toString());
+    }
+
+    public String genereerBestandsnaam(){
+        return uitvoerenGet(URL_BESTANDSNAAM,String.class,0L);
+    }
+    public String getUploadPad(){
+        return uitvoerenGet(URL_UPLOADPAD,String.class,0L);
     }
 
 }

@@ -75,7 +75,13 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
-        return response.getEntity(String.class);
+
+        String ret =
+         response.getEntity(String.class);
+
+        LOGGER.debug(ret);
+
+        return ret;
     }
 
     protected <T> T uitvoerenGet(String adres, Class<T> clazz, Long ingelogdeGebruiker, String... args) {
@@ -105,7 +111,12 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
 
-        return gson.fromJson(response.getEntity(String.class), clazz);
+        String ret =
+                response.getEntity(String.class);
+
+        LOGGER.debug(ret);
+
+        return gson.fromJson(ret, clazz);
     }
 
     protected <T> List<T> uitvoerenGetLijst(String adres, Class<T> clazz, String... args) {

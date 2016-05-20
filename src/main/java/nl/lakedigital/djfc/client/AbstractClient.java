@@ -95,7 +95,11 @@ public abstract class AbstractClient {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
 
-        return gson.fromJson(response.getEntity(String.class), clazz);
+        String result = response.getEntity(String.class);
+
+        System.out.println(result);
+
+        return gson.fromJson(result, clazz);
     }
 
     protected <T> List<T> uitvoerenGetLijst(String adres, Class<T> clazz, String... args) {
