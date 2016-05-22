@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
-    private final String URL_LIJST = "http://localhost:8081/orga/rest/bijlage/alles";
-    private final String URL_OPSLAAN = "http://localhost:8081/orga/rest/bijlage/opslaan";
-    private final String URL_OPSLAANEnkel = "http://localhost:8081/orga/rest/bijlage/opslaanBijlage";
-    private final String URL_VERWIJDEREN = "http://localhost:8081/orga/rest/bijlage/verwijderen";
-    private final String URL_ZOEKEN = "http://localhost:8081/orga/rest/bijlage/zoeken";
-    private final String URL_BESTANDSNAAM = "http://localhost:8081/orga/rest/bijlage/genereerBestandsnaam";
-    private final String URL_UPLOADPAD = "http://localhost:8081/orga/rest/bijlage/getUploadPad";
+    private final String URL_LIJST = "http://localhost:8081/oga/rest/bijlage/alles";
+    private final String URL_OPSLAAN = "http://localhost:8081/oga/rest/bijlage/opslaan";
+    private final String URL_OPSLAANEnkel = "http://localhost:8081/oga/rest/bijlage/opslaanBijlage";
+    private final String URL_VERWIJDEREN = "http://localhost:8081/oga/rest/bijlage/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:8081/oga/rest/bijlage/zoeken";
+    private final String URL_BESTANDSNAAM = "http://localhost:8081/oga/rest/bijlage/genereerBestandsnaam";
+    private final String URL_UPLOADPAD = "http://localhost:8081/oga/rest/bijlage/getUploadPad";
 
     @Override
     protected Type getTypeToken() {

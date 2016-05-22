@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdresClient extends AbstractOgaClient<JsonAdres> {
-    private final String URL_LIJST = "http://localhost:8081/orga/rest/adres/alles";
-    private final String URL_OPSLAAN = "http://localhost:8081/orga/rest/adres/opslaan";
-    private final String URL_VERWIJDEREN = "http://localhost:8081/orga/rest/adres/verwijderen";
-    private final String URL_LEES = "http://localhost:8081/orga/rest/adres/lees";
-    private final String URL_ADRES_BIJ_POSTCODE = "http://localhost:8081/orga/rest/adres/ophalenAdresOpPostcode";
-    private final String URL_ZOEKEN = "http://localhost:8081/orga/rest/adres/zoeken";
+    private final String URL_LIJST = "http://localhost:8081/oga/rest/adres/alles";
+    private final String URL_OPSLAAN = "http://localhost:8081/oga/rest/adres/opslaan";
+    private final String URL_VERWIJDEREN = "http://localhost:8081/oga/rest/adres/verwijderen";
+    private final String URL_LEES = "http://localhost:8081/oga/rest/adres/lees";
+    private final String URL_ADRES_BIJ_POSTCODE = "http://localhost:8081/oga/rest/adres/ophalenAdresOpPostcode";
+    private final String URL_ZOEKEN = "http://localhost:8081/oga/rest/adres/zoeken";
 
     @Override
     protected Type getTypeToken() {

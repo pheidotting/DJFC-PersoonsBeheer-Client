@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
-    private final String URL_LIJST = "http://localhost:7072/orga/rest/opmerking/alles";
-    private final String URL_OPSLAAN = "http://localhost:7072/orga/rest/opmerking/opslaan";
-    private final String URL_VERWIJDEREN = "http://localhost:7072/orga/rest/opmerking/verwijderen";
-    private final String URL_ZOEKEN = "http://localhost:7072/orga/rest/opmerking/zoeken";
+    private final String URL_LIJST = "http://localhost:7072/oga/rest/opmerking/alles";
+    private final String URL_OPSLAAN = "http://localhost:7072/oga/rest/opmerking/opslaan";
+    private final String URL_VERWIJDEREN = "http://localhost:7072/oga/rest/opmerking/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:7072/oga/rest/opmerking/zoeken";
 
     @Override
     protected Type getTypeToken() {
