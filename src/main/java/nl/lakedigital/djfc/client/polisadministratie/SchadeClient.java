@@ -11,13 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SchadeClient extends AbstractClient {
-    private final String URL_OPSLAAN = "http://localhost:7073/pa/rest/schade/opslaan";
-    private final String URL_LIJST = "http://localhost:7073/pa/rest/schade/lijst";
-    private final String URL_LIJST_BEDRIJF = "http://localhost:7073/pa/rest/schade/lijstBijBedrijf";
-    private final String URL_LEES = "http://localhost:7073/pa/rest/schade/lees";
-    private final String URL_VERWIJDER = "http://localhost:7073/pa/rest/schade/verwijder";
-    private final String URL_SOORTEN_SCHADE = "http://localhost:7073/pa/rest/schade/soortenSchade";
-    private final String URL_STATUSSEN_SCHADE = "http://localhost:7073/pa/rest/schade/lijstStatusSchade";
+    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/pa/rest/schade/opslaan";
+    private final String URL_LIJST = "http://localhost:" + poortNummer + "/pa/rest/schade/lijst";
+    private final String URL_LIJST_BEDRIJF = "http://localhost:" + poortNummer + "/pa/rest/schade/lijstBijBedrijf";
+    private final String URL_LEES = "http://localhost:" + poortNummer + "/pa/rest/schade/lees";
+    private final String URL_VERWIJDER = "http://localhost:" + poortNummer + "/pa/rest/schade/verwijder";
+    private final String URL_SOORTEN_SCHADE = "http://localhost:" + poortNummer + "/pa/rest/schade/soortenSchade";
+    private final String URL_STATUSSEN_SCHADE = "http://localhost:" + poortNummer + "/pa/rest/schade/lijstStatusSchade";
+
+    public SchadeClient(int poortNummer) {
+        super(poortNummer);
+    }
 
     @Override
     protected Type getTypeToken() {

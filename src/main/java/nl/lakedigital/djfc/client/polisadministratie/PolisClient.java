@@ -10,15 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PolisClient extends AbstractClient {
-    private final String URL_ALLE_PARTICULIERE_POLIS_SOORTEN = "http://localhost:7073/pa/rest/polis/alleParticulierePolisSoorten";
-    private final String URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN = "http://localhost:7073/pa/rest/polis/alleZakelijkePolisSoorten";
-    private final String URL_LEES = "http://localhost:7073/pa/rest/polis/lees";
-    private final String URL_BEINDIGEN = "http://localhost:7073/pa/rest/polis/beeindigen";
-    private final String URL_LIJST = "http://localhost:7073/pa/rest/polis/lijst";
-    private final String URL_LIJST_BEDRIJF = "http://localhost:7073/pa/rest/polis/lijstBijBedrijf";
-    private final String URL_OPSLAAN = "http://localhost:7073/pa/rest/polis/opslaan";
-    private final String URL_VERWIJDER = "http://localhost:7073/pa/rest/polis/verwijder";
-    private final String URL_ZOEK_OP_POLISNUMMER = "http://localhost:7073/pa/rest/polis/zoekOpPolisNummer";
+    private final String URL_ALLE_PARTICULIERE_POLIS_SOORTEN = "http://localhost:" + poortNummer + "/pa/rest/polis/alleParticulierePolisSoorten";
+    private final String URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN = "http://localhost:" + poortNummer + "/pa/rest/polis/alleZakelijkePolisSoorten";
+    private final String URL_LEES = "http://localhost:" + poortNummer + "/pa/rest/polis/lees";
+    private final String URL_BEINDIGEN = "http://localhost:" + poortNummer + "/pa/rest/polis/beeindigen";
+    private final String URL_LIJST = "http://localhost:" + poortNummer + "/pa/rest/polis/lijst";
+    private final String URL_LIJST_BEDRIJF = "http://localhost:" + poortNummer + "/pa/rest/polis/lijstBijBedrijf";
+    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/pa/rest/polis/opslaan";
+    private final String URL_VERWIJDER = "http://localhost:" + poortNummer + "/pa/rest/polis/verwijder";
+    private final String URL_ZOEK_OP_POLISNUMMER = "http://localhost:" + poortNummer + "/pa/rest/polis/zoekOpPolisNummer";
+
+    public PolisClient(int poortNummer) {
+        super(poortNummer);
+    }
 
     public List<String> alleParticulierePolisSoorten() {
         return uitvoerenGetLijst(URL_ALLE_PARTICULIERE_POLIS_SOORTEN, String.class);

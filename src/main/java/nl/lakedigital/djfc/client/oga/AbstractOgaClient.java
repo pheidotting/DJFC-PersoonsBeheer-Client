@@ -20,6 +20,10 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
 
+    public AbstractOgaClient(int poortNummer) {
+        super(poortNummer);
+    }
+
     private final static Logger LOGGER = LoggerFactory.getLogger(AbstractOgaClient.class);
 
 

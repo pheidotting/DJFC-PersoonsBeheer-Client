@@ -3,14 +3,16 @@ package nl.lakedigital.djfc.client.dejonge;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonKantoor;
-import nl.lakedigital.djfc.commons.json.JsonMedewerker;
-import nl.lakedigital.djfc.commons.json.JsonRelatie;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class KantoorClient extends AbstractClient {
-    private final String URL_LEES = "http://localhost:8080/dejonge/rest/applicaties/kantoor/lees";
+    private final String URL_LEES = "http://localhost:"+poortNummer+"/dejonge/rest/applicaties/kantoor/lees";
+
+    public KantoorClient(int poortNummer) {
+        super(poortNummer);
+    }
 
     @Override
     protected Type getTypeToken() {

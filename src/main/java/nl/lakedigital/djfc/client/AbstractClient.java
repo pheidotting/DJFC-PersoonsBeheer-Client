@@ -17,6 +17,11 @@ import java.util.List;
 public abstract class AbstractClient {
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
+    protected int poortNummer;
+
+    public AbstractClient(int poortNummer) {
+        this.poortNummer = poortNummer;
+    }
 
     private final static Logger LOGGER = LoggerFactory.getLogger(AbstractClient.class);
 

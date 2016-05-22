@@ -8,7 +8,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MedewerkerClient extends AbstractClient {
-    private final String URL_LEES = "http://localhost:8080/dejonge/rest/applicaties/medewerker/lees";
+    private final String URL_LEES = "http://localhost:" + poortNummer + "/dejonge/rest/applicaties/medewerker/lees";
+
+    public MedewerkerClient(int poortNummer) {
+        super(poortNummer);
+    }
 
     @Override
     protected Type getTypeToken() {

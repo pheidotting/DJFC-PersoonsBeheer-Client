@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
-    private final String URL_LIJST = "http://localhost:8081/oga/rest/bijlage/alles";
-    private final String URL_OPSLAAN = "http://localhost:8081/oga/rest/bijlage/opslaan";
-    private final String URL_OPSLAANEnkel = "http://localhost:8081/oga/rest/bijlage/opslaanBijlage";
-    private final String URL_VERWIJDEREN = "http://localhost:8081/oga/rest/bijlage/verwijderen";
-    private final String URL_ZOEKEN = "http://localhost:8081/oga/rest/bijlage/zoeken";
-    private final String URL_BESTANDSNAAM = "http://localhost:8081/oga/rest/bijlage/genereerBestandsnaam";
-    private final String URL_UPLOADPAD = "http://localhost:8081/oga/rest/bijlage/getUploadPad";
+    private final String URL_LIJST = "http://localhost:" + poortNummer + "/oga/rest/bijlage/alles";
+    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/oga/rest/bijlage/opslaan";
+    private final String URL_OPSLAANEnkel = "http://localhost:" + poortNummer + "/oga/rest/bijlage/opslaanBijlage";
+    private final String URL_VERWIJDEREN = "http://localhost:" + poortNummer + "/oga/rest/bijlage/verwijderen";
+    private final String URL_ZOEKEN = "http://localhost:" + poortNummer + "/oga/rest/bijlage/zoeken";
+    private final String URL_BESTANDSNAAM = "http://localhost:" + poortNummer + "/oga/rest/bijlage/genereerBestandsnaam";
+    private final String URL_UPLOADPAD = "http://localhost:" + poortNummer + "/oga/rest/bijlage/getUploadPad";
+
+    public BijlageClient(int poortNummer) {
+        super(poortNummer);
+    }
 
     @Override
     protected Type getTypeToken() {

@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RelatieClient extends AbstractClient {
-    private final String URL_LEES = "http://localhost:8080/dejonge/rest/applicaties/relatie/lees";
-    private final String URL_ZOEK_OP_EMAILADRES  = "http://localhost:8080/dejonge/rest/applicaties/relatie/zoekOpEmailadres";
-    private final String URL_ZOEK_OP_NAAM = "http://localhost:8080/dejonge/rest/applicaties/relatie/zoekOpNaam";
+    private final String URL_LEES = "http://localhost:" + poortNummer + "/dejonge/rest/applicaties/relatie/lees";
+    private final String URL_ZOEK_OP_EMAILADRES = "http://localhost:" + poortNummer + "/dejonge/rest/applicaties/relatie/zoekOpEmailadres";
+    private final String URL_ZOEK_OP_NAAM = "http://localhost:" + poortNummer + "/dejonge/rest/applicaties/relatie/zoekOpNaam";
+
+    public RelatieClient(int poortNummer) {
+        super(poortNummer);
+    }
 
     @Override
     protected Type getTypeToken() {
