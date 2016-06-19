@@ -27,13 +27,13 @@ public class RelatieClient extends AbstractClient {
 
         System.out.println("Aanroepen " + URL_LEES);
 
-        return uitvoerenGet(URL_LEES, JsonRelatie.class, 9L, id.toString());
+        return uitvoerenGet(URL_LEES, JsonRelatie.class, id.toString());
     }
 
     public JsonRelatie zoekOpEmailadres(String emailadres) {
         System.out.println("Aanroepen " + URL_ZOEK_OP_EMAILADRES);
 
-        return uitvoerenGet(URL_ZOEK_OP_EMAILADRES, JsonRelatie.class, 9L, emailadres,"dummy");
+        return uitvoerenGet(URL_ZOEK_OP_EMAILADRES, JsonRelatie.class, emailadres, "dummy");
     }
 
     public List<JsonRelatie> zoekOpNaam(String naam) {

@@ -29,13 +29,13 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
 
     public abstract List<T> lijst(String soortEntiteit, Long entiteitId);
 
-    public abstract String opslaan(List<T> jsonAdressen);
+    public abstract String opslaan(List<T> jsonAdressen, Long ingelogdeGebruiker, String trackAndTraceId);
 
-    public abstract void verwijder(String soortEntiteit, Long entiteitId);
+    public abstract void verwijder(String soortEntiteit, Long entiteitId, Long ingelogdeGebruiker, String trackAndTraceId);
 
     public abstract List<T> zoeken(String zoekterm);
 
-    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker) {
+    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId) {
         Gson gson = builder.create();
 
         Client client = Client.create();
@@ -45,12 +45,17 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         LOGGER.info("Versturen {}", verstuurObject);
         System.out.println("Versturen " + verstuurObject + " naar " + adres);
 
-        ClientResponse cr = webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).post(ClientResponse.class, verstuurObject);
+        String gebruiker = null;
+        if (ingelogdeGebruiker != null) {
+            gebruiker = String.valueOf(ingelogdeGebruiker);
+        }
+
+        ClientResponse cr = webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", gebruiker).header("trackAndTraceId", trackAndTraceId).post(ClientResponse.class, verstuurObject);
 
         return cr.getEntity(String.class);
     }
 
-    protected void aanroepenUrlPostZonderBody(String adres, Long ingelogdeGebruiker, String... args) {
+    protected void aanroepenUrlPostZonderBody(String adres, String trackAndTraceId, Long ingelogdeGebruiker, String... args) {
         Gson gson = builder.create();
 
         Client client = Client.create();
@@ -61,9 +66,14 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
             }
         }
 
+        String gebruiker = null;
+        if (ingelogdeGebruiker != null) {
+            gebruiker = String.valueOf(ingelogdeGebruiker);
+        }
+
         WebResource webResource = client.resource(adres);
 
-        webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).post();
+        webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", gebruiker).header("trackAndTraceId", trackAndTraceId).post();
     }
 
     protected String uitvoerenGet(String adres) {
@@ -80,15 +90,14 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
 
-        String ret =
-         response.getEntity(String.class);
+        String ret = response.getEntity(String.class);
 
         LOGGER.debug(ret);
 
         return ret;
     }
 
-    protected <T> T uitvoerenGet(String adres, Class<T> clazz, Long ingelogdeGebruiker, String... args) {
+    protected <T> T uitvoerenGet(String adres, Class<T> clazz, String... args) {
         LOGGER.debug("uitvoerenGet");
 
         Gson gson = builder.create();
@@ -106,17 +115,12 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         Client client = Client.create(clientConfig);
         WebResource webResource = client.resource(adres);
         ClientResponse response;
-        if (ingelogdeGebruiker != null) {
-            response = webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).get(ClientResponse.class);
-        } else {
-            response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
-        }
+        response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
 
-        String ret =
-                response.getEntity(String.class);
+        String ret = response.getEntity(String.class);
 
         LOGGER.debug(ret);
 

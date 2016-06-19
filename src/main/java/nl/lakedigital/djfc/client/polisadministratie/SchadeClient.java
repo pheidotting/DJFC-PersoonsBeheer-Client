@@ -29,8 +29,8 @@ public class SchadeClient extends AbstractClient {
         }.getType();
     }
 
-    public Long opslaan(JsonSchade jsonSchade) {
-        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, jsonSchade, 33L));
+    public Long opslaan(JsonSchade jsonSchade, Long ingelogdeGebruiker, String trackAndTraceId) {
+        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, jsonSchade, ingelogdeGebruiker, trackAndTraceId));
     }
 
     public List<JsonSchade> lijst(Long relatieId) {
@@ -42,11 +42,11 @@ public class SchadeClient extends AbstractClient {
     }
 
     public JsonSchade lees(String id) {
-        return uitvoerenGet(URL_LEES, JsonSchade.class, 33L, id);
+        return uitvoerenGet(URL_LEES, JsonSchade.class, id);
     }
 
-    public void verwijder(Long id) {
-        aanroepenUrlPostZonderBody(URL_VERWIJDER + "/" + id, 33L);
+    public void verwijder(Long id, Long ingelogdeGebruiker, String trackAndTraceId) {
+        aanroepenUrlPostZonderBody(URL_VERWIJDER + "/" + id, ingelogdeGebruiker, trackAndTraceId);
     }
 
     public List<JsonSoortSchade> soortenSchade(String query) {

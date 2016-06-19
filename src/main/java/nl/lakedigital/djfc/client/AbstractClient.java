@@ -26,7 +26,7 @@ public abstract class AbstractClient {
     private final static Logger LOGGER = LoggerFactory.getLogger(AbstractClient.class);
 
 
-    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker) {
+    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId) {
         Gson gson = builder.create();
 
         Client client = Client.create();
@@ -36,12 +36,12 @@ public abstract class AbstractClient {
         LOGGER.info("Versturen {}", verstuurObject);
         System.out.println("Versturen " + verstuurObject + " naar " + adres);
 
-        ClientResponse cr = webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).post(ClientResponse.class, verstuurObject);
+        ClientResponse cr = webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).header("trackAndTraceId", trackAndTraceId).post(ClientResponse.class, verstuurObject);
 
         return cr.getEntity(String.class);
     }
 
-    protected void aanroepenUrlPostZonderBody(String adres, Long ingelogdeGebruiker, String... args) {
+    protected void aanroepenUrlPostZonderBody(String adres, Long ingelogdeGebruiker, String trackAndTraceId, String... args) {
         Gson gson = builder.create();
 
         Client client = Client.create();
@@ -54,7 +54,7 @@ public abstract class AbstractClient {
 
         WebResource webResource = client.resource(adres);
 
-        webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).post();
+        webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).header("trackAndTraceId", trackAndTraceId).post();
     }
 
     protected String uitvoerenGet(String adres) {
@@ -73,7 +73,7 @@ public abstract class AbstractClient {
         return response.getEntity(String.class);
     }
 
-    protected <T> T uitvoerenGet(String adres, Class<T> clazz, Long ingelogdeGebruiker, String... args) {
+    protected <T> T uitvoerenGet(String adres, Class<T> clazz, String... args) {
         LOGGER.debug("uitvoerenGet");
 
         Gson gson = builder.create();
@@ -91,11 +91,7 @@ public abstract class AbstractClient {
         Client client = Client.create(clientConfig);
         WebResource webResource = client.resource(adres);
         ClientResponse response;
-        if (ingelogdeGebruiker != null) {
-            response = webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).get(ClientResponse.class);
-        } else {
             response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
-        }
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }

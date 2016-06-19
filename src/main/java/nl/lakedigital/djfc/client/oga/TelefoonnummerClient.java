@@ -40,18 +40,18 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer> 
     }
 
     @Override
-    public String opslaan(List<JsonTelefoonnummer> jsonAdressen) {
+    public String opslaan(List<JsonTelefoonnummer> jsonAdressen, Long ingelogdeGebruiker, String trackAndTraceId) {
 
         System.out.println("Aanroepen " + URL_OPSLAAN);
 
-        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, 5L);
+        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, ingelogdeGebruiker, trackAndTraceId);
     }
 
     @Override
-    public void verwijder(String soortEntiteit, Long entiteitId) {
+    public void verwijder(String soortEntiteit, Long entiteitId, Long ingelogdeGebruiker, String trackAndTraceId) {
 
         System.out.println("Aanroepen " + URL_VERWIJDEREN);
 
-        aanroepenUrlPostZonderBody(URL_VERWIJDEREN, 5L, soortEntiteit, entiteitId.toString());
+        aanroepenUrlPostZonderBody(URL_VERWIJDEREN, ingelogdeGebruiker, trackAndTraceId, soortEntiteit, entiteitId.toString());
     }
 }
