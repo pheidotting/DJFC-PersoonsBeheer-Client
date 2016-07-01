@@ -8,15 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdresClient extends AbstractOgaClient<JsonAdres> {
-    private final String URL_LIJST = "http://localhost:" + poortNummer + "/oga/rest/adres/alles";
-    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/oga/rest/adres/opslaan";
-    private final String URL_VERWIJDEREN = "http://localhost:" + poortNummer + "/oga/rest/adres/verwijderen";
-    private final String URL_LEES = "http://localhost:" + poortNummer + "/oga/rest/adres/lees";
-    private final String URL_ADRES_BIJ_POSTCODE = "http://localhost:" + poortNummer + "/oga/rest/adres/ophalenAdresOpPostcode";
-    private final String URL_ZOEKEN = "http://localhost:" + poortNummer + "/oga/rest/adres/zoeken";
+    private final String URL_LIJST = "/rest/adres/alles";
+    private final String URL_OPSLAAN = "/rest/adres/opslaan";
+    private final String URL_VERWIJDEREN = "/rest/adres/verwijderen";
+    private final String URL_LEES = "/rest/adres/lees";
+    private final String URL_ADRES_BIJ_POSTCODE = "/rest/adres/ophalenAdresOpPostcode";
+    private final String URL_ZOEKEN = "/rest/adres/zoeken";
 
-    public AdresClient(int poortNummer) {
-        super(poortNummer);
+    public AdresClient(String basisUrl) {
+        super(basisUrl);
+    }
+
+    public AdresClient() {
     }
 
     @Override
@@ -41,8 +44,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres> {
     }
 
     public List<JsonAdres> lijst(String soortEntiteit, Long entiteitId) {
-
-        System.out.println("Aanroepen " + URL_LIJST);
+        LOGGER.debug("Aanroepen " + URL_LIJST);
 
         return uitvoerenGetLijst(URL_LIJST, JsonAdres.class, soortEntiteit, entiteitId.toString());
     }

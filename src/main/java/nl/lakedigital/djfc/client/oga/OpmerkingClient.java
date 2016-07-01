@@ -10,13 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
-    private final String URL_LIJST = "http://localhost:" + poortNummer + "/oga/rest/opmerking/alles";
-    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/oga/rest/opmerking/opslaan";
-    private final String URL_VERWIJDEREN = "http://localhost:" + poortNummer + "/oga/rest/opmerking/verwijderen";
-    private final String URL_ZOEKEN = "http://localhost:" + poortNummer + "/oga/rest/opmerking/zoeken";
+    private final String URL_LIJST = "/rest/opmerking/alles";
+    private final String URL_OPSLAAN = "/rest/opmerking/opslaan";
+    private final String URL_VERWIJDEREN = "/rest/opmerking/verwijderen";
+    private final String URL_ZOEKEN = "/rest/opmerking/zoeken";
 
-    public OpmerkingClient(int poortNummer) {
-        super(poortNummer);
+    public OpmerkingClient(String basisUrl) {
+        super(basisUrl);
+    }
+
+    public OpmerkingClient() {
     }
 
     @Override

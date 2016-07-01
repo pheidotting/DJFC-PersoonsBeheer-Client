@@ -15,16 +15,23 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public abstract class AbstractClient {
+    protected final static Logger LOGGER = LoggerFactory.getLogger(AbstractClient.class);
+
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
-    protected int poortNummer;
+    protected String basisUrl;
 
-    public AbstractClient(int poortNummer) {
-        this.poortNummer = poortNummer;
+    public AbstractClient() {
     }
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractClient.class);
+    public AbstractClient(String basisUrl) {
+        this.basisUrl = basisUrl;
+    }
 
+    public void setBasisUrl(String basisUrl) {
+        LOGGER.debug("zet basisurl {}", basisUrl);
+        this.basisUrl = basisUrl;
+    }
 
     protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId) {
         Gson gson = builder.create();
@@ -34,7 +41,7 @@ public abstract class AbstractClient {
         WebResource webResource = client.resource(adres);
         String verstuurObject = gson.toJson(object);
         LOGGER.info("Versturen {}", verstuurObject);
-        System.out.println("Versturen " + verstuurObject + " naar " + adres);
+        System.out.println("Versturen " + verstuurObject + " naar " + basisUrl + adres);
 
         ClientResponse cr = webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).header("trackAndTraceId", trackAndTraceId).post(ClientResponse.class, verstuurObject);
 
@@ -52,7 +59,7 @@ public abstract class AbstractClient {
             }
         }
 
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
 
         webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).header("trackAndTraceId", trackAndTraceId).post();
     }
@@ -65,7 +72,7 @@ public abstract class AbstractClient {
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
@@ -83,15 +90,15 @@ public abstract class AbstractClient {
                 adres = adres + "/" + arg;
             }
         }
-        LOGGER.info("Aanroepen via GET " + adres);
-        System.out.println("Aanroepen via GET " + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        System.out.println("Aanroepen via GET " + basisUrl + adres);
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response;
-            response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
+        response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
@@ -111,13 +118,13 @@ public abstract class AbstractClient {
                 adres = adres + "/" + arg;
             }
         }
-        LOGGER.info("Aanroepen via GET " + adres);
-        System.out.println("Aanroepen via GET " + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        System.out.println("Aanroepen via GET " + basisUrl + adres);
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());

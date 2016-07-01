@@ -8,13 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer> {
-    private final String URL_LIJST = "http://localhost:" + poortNummer + "/oga/rest/rekeningnummer/alles";
-    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/oga/rest/rekeningnummer/opslaan";
-    private final String URL_VERWIJDEREN = "http://localhost:" + poortNummer + "/oga/rest/rekeningnummer/verwijderen";
-    private final String URL_ZOEKEN = "http://localhost:" + poortNummer + "/oga/rest/rekeningnummer/zoeken";
+    private final String URL_LIJST = "/rest/rekeningnummer/alles";
+    private final String URL_OPSLAAN = "/rest/rekeningnummer/opslaan";
+    private final String URL_VERWIJDEREN = "/rest/rekeningnummer/verwijderen";
+    private final String URL_ZOEKEN = "/rest/rekeningnummer/zoeken";
 
-    public RekeningClient(int poortNummer) {
-        super(poortNummer);
+    public RekeningClient(String basisUrl) {
+        super(basisUrl);
+    }
+
+    public RekeningClient() {
     }
 
     @Override

@@ -8,13 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer> {
-    private final String URL_LIJST = "http://localhost:" + poortNummer + "/oga/rest/telefoonnummer/alles";
-    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/oga/rest/telefoonnummer/opslaan";
-    private final String URL_VERWIJDEREN = "http://localhost:" + poortNummer + "/oga/rest/telefoonnummer/verwijderen";
-    private final String URL_ZOEKEN = "http://localhost:" + poortNummer + "/oga/rest/telefoonnummer/zoeken";
+    private final String URL_LIJST = "/rest/telefoonnummer/alles";
+    private final String URL_OPSLAAN = "/rest/telefoonnummer/opslaan";
+    private final String URL_VERWIJDEREN = "/rest/telefoonnummer/verwijderen";
+    private final String URL_ZOEKEN = "/rest/telefoonnummer/zoeken";
 
-    public TelefoonnummerClient(int poortNummer) {
-        super(poortNummer);
+    public TelefoonnummerClient(String basisUrl) {
+        super(basisUrl);
+    }
+
+    public TelefoonnummerClient() {
     }
 
     @Override

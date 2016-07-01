@@ -8,10 +8,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MedewerkerClient extends AbstractClient {
-    private final String URL_LEES = "http://localhost:" + poortNummer + "/dejonge/rest/applicaties/medewerker/lees";
+    private final String URL_LEES = basisUrl + "/rest/applicaties/medewerker/lees";
 
-    public MedewerkerClient(int poortNummer) {
-        super(poortNummer);
+    public MedewerkerClient(String basisUrl) {
+        super(basisUrl);
     }
 
     @Override

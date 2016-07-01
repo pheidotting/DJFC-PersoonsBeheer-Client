@@ -23,15 +23,18 @@ import java.util.List;
 public class CommunicatieClient extends AbstractClient {
     private final static Logger LOGGER = LoggerFactory.getLogger(CommunicatieClient.class);
 
-    private final String URL_ALLES = "http://localhost:" + poortNummer + "/communicatie/rest/communicatieproduct/alles";
-    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/communicatie/rest/communicatieproduct/nieuw";
-    private final String URL_VERSTUREN = "http://localhost:" + poortNummer + "/communicatie/rest/communicatieproduct/versturen/act";
-    private final String URL_MARKEER_OM_TE_VERZENDEN = "http://localhost:" + poortNummer + "/communicatie/rest/communicatieproduct/markeerOmTeVerzenden";
-    private final String URL_MARKEER_GELEZEN = "http://localhost:" + poortNummer + "/communicatie/rest/communicatieproduct/markeerAlsGelezen";
-    private final String URL_LEES = "http://localhost:" + poortNummer + "/communicatie/rest/communicatieproduct/lees";
+    private final String URL_ALLES = basisUrl + "/rest/communicatieproduct/alles";
+    private final String URL_OPSLAAN = basisUrl + "/rest/communicatieproduct/nieuw";
+    private final String URL_VERSTUREN = basisUrl + "/rest/communicatieproduct/versturen/act";
+    private final String URL_MARKEER_OM_TE_VERZENDEN = basisUrl + "/rest/communicatieproduct/markeerOmTeVerzenden";
+    private final String URL_MARKEER_GELEZEN = basisUrl + "/rest/communicatieproduct/markeerAlsGelezen";
+    private final String URL_LEES = basisUrl + "/rest/communicatieproduct/lees";
 
-    public CommunicatieClient(int poortNummer) {
-        super(poortNummer);
+    public CommunicatieClient(String basisUrl) {
+        super(basisUrl);
+    }
+
+    public CommunicatieClient() {
     }
 
     @Override

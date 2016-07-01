@@ -9,18 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PolisClient extends AbstractClient {
-    private final String URL_ALLE_PARTICULIERE_POLIS_SOORTEN = "http://localhost:" + poortNummer + "/pa/rest/polis/alleParticulierePolisSoorten";
-    private final String URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN = "http://localhost:" + poortNummer + "/pa/rest/polis/alleZakelijkePolisSoorten";
-    private final String URL_LEES = "http://localhost:" + poortNummer + "/pa/rest/polis/lees";
-    private final String URL_BEINDIGEN = "http://localhost:" + poortNummer + "/pa/rest/polis/beeindigen";
-    private final String URL_LIJST = "http://localhost:" + poortNummer + "/pa/rest/polis/lijst";
-    private final String URL_LIJST_BEDRIJF = "http://localhost:" + poortNummer + "/pa/rest/polis/lijstBijBedrijf";
-    private final String URL_OPSLAAN = "http://localhost:" + poortNummer + "/pa/rest/polis/opslaan";
-    private final String URL_VERWIJDER = "http://localhost:" + poortNummer + "/pa/rest/polis/verwijder";
-    private final String URL_ZOEK_OP_POLISNUMMER = "http://localhost:" + poortNummer + "/pa/rest/polis/zoekOpPolisNummer";
+    private final String URL_ALLE_PARTICULIERE_POLIS_SOORTEN = basisUrl + "/rest/polis/alleParticulierePolisSoorten";
+    private final String URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN = basisUrl + "/rest/polis/alleZakelijkePolisSoorten";
+    private final String URL_LEES = basisUrl + "/rest/polis/lees";
+    private final String URL_BEINDIGEN = basisUrl + "/rest/polis/beeindigen";
+    private final String URL_LIJST = basisUrl + "/rest/polis/lijst";
+    private final String URL_LIJST_BEDRIJF = basisUrl + "/rest/polis/lijstBijBedrijf";
+    private final String URL_OPSLAAN = basisUrl + "/rest/polis/opslaan";
+    private final String URL_VERWIJDER = basisUrl + "/rest/polis/verwijder";
+    private final String URL_ZOEK_OP_POLISNUMMER = basisUrl + "/rest/polis/zoekOpPolisNummer";
 
-    public PolisClient(int poortNummer) {
-        super(poortNummer);
+    public PolisClient(String basisUrl) {
+        super(basisUrl);
+    }
+
+    public PolisClient() {
     }
 
     public List<String> alleParticulierePolisSoorten() {

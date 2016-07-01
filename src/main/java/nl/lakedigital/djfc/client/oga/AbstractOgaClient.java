@@ -10,8 +10,6 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.AbstracteJsonEntiteitMetSoortEnId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -20,11 +18,12 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
 
-    public AbstractOgaClient(int poortNummer) {
-        super(poortNummer);
+    public AbstractOgaClient() {
     }
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractOgaClient.class);
+    public AbstractOgaClient(String basisUrl) {
+        super(basisUrl);
+    }
 
 
     public abstract List<T> lijst(String soortEntiteit, Long entiteitId);
@@ -40,10 +39,10 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
 
         Client client = Client.create();
 
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
         String verstuurObject = gson.toJson(object);
         LOGGER.info("Versturen {}", verstuurObject);
-        System.out.println("Versturen " + verstuurObject + " naar " + adres);
+        System.out.println("Versturen " + verstuurObject + " naar " + basisUrl + adres);
 
         String gebruiker = null;
         if (ingelogdeGebruiker != null) {
@@ -71,20 +70,20 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
             gebruiker = String.valueOf(ingelogdeGebruiker);
         }
 
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
 
         webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", gebruiker).header("trackAndTraceId", trackAndTraceId).post();
     }
 
     protected String uitvoerenGet(String adres) {
-        //        adres = adres.replace("{{poort}}", bepaalPoort());
-        LOGGER.info("Aanroepen via GET " + adres);
-        System.out.println("Aanroepen via GET " + adres);
+        //        basisUrl+adres = basisUrl+adres.replace("{{poort}}", bepaalPoort());
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        System.out.println("Aanroepen via GET " + basisUrl + adres);
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
@@ -107,13 +106,13 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
                 adres = adres + "/" + arg;
             }
         }
-        LOGGER.info("Aanroepen via GET " + adres);
-        System.out.println("Aanroepen via GET " + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        System.out.println("Aanroepen via GET " + basisUrl + adres);
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response;
         response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
@@ -135,13 +134,13 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
                 adres = adres + "/" + arg;
             }
         }
-        LOGGER.info("Aanroepen via GET " + adres);
-        System.out.println("Aanroepen via GET " + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        System.out.println("Aanroepen via GET " + basisUrl + adres);
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(adres);
+        WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
