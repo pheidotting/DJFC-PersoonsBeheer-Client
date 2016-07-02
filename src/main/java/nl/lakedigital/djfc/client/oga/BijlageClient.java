@@ -2,6 +2,7 @@ package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonBijlage;
+import nl.lakedigital.djfc.commons.json.WijzigenOmschrijvingBijlage;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
     private final String URL_ZOEKEN = "/rest/bijlage/zoeken";
     private final String URL_BESTANDSNAAM = "/rest/bijlage/genereerBestandsnaam";
     private final String URL_UPLOADPAD = "/rest/bijlage/getUploadPad";
+    private final String URL_WIJZIG_OMSCHRIJVING_BIJLAGE = "/rest/bijlage/wijzigOmschrijvingBijlage";
 
     public BijlageClient(String basisUrl) {
         super(basisUrl);
@@ -36,6 +38,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
 
         return uitvoerenGet(URL_LEES, JsonBijlage.class, id.toString());
     }
+
     @Override
     public List<JsonBijlage> zoeken(String zoekterm) {
 
@@ -78,8 +81,12 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
     public String genereerBestandsnaam() {
         return uitvoerenGet(URL_BESTANDSNAAM, String.class);
     }
-    public String getUploadPad(){
+
+    public String getUploadPad() {
         return uitvoerenGet(URL_UPLOADPAD, String.class);
     }
 
+    public void wijzigOmschrijvingBijlage(WijzigenOmschrijvingBijlage wijzigenOmschrijvingBijlage, Long ingelogdeGebruiker, String trackAndTraceId) {
+        aanroepenUrlPost(URL_WIJZIG_OMSCHRIJVING_BIJLAGE, wijzigenOmschrijvingBijlage, ingelogdeGebruiker, trackAndTraceId);
+    }
 }
