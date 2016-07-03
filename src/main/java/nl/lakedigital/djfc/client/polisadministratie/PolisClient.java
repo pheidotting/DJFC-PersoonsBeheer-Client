@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PolisClient extends AbstractClient {
-    private final String URL_ALLE_PARTICULIERE_POLIS_SOORTEN = basisUrl + "/rest/polis/alleParticulierePolisSoorten";
-    private final String URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN = basisUrl + "/rest/polis/alleZakelijkePolisSoorten";
-    private final String URL_LEES = basisUrl + "/rest/polis/lees";
-    private final String URL_BEINDIGEN = basisUrl + "/rest/polis/beeindigen";
-    private final String URL_LIJST = basisUrl + "/rest/polis/lijst";
-    private final String URL_LIJST_BEDRIJF = basisUrl + "/rest/polis/lijstBijBedrijf";
-    private final String URL_OPSLAAN = basisUrl + "/rest/polis/opslaan";
-    private final String URL_VERWIJDER = basisUrl + "/rest/polis/verwijder";
-    private final String URL_ZOEK_OP_POLISNUMMER = basisUrl + "/rest/polis/zoekOpPolisNummer";
+    private final String URL_ALLE_PARTICULIERE_POLIS_SOORTEN = "/rest/polis/alleParticulierePolisSoorten";
+    private final String URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN = "/rest/polis/alleZakelijkePolisSoorten";
+    private final String URL_LEES = "/rest/polis/lees";
+    private final String URL_BEINDIGEN = "/rest/polis/beeindigen";
+    private final String URL_LIJST = "/rest/polis/lijst";
+    private final String URL_LIJST_BEDRIJF = "/rest/polis/lijstBijBedrijf";
+    private final String URL_OPSLAAN = "/rest/polis/opslaan";
+    private final String URL_VERWIJDER = "/rest/polis/verwijder";
+    private final String URL_ZOEK_OP_POLISNUMMER = "/rest/polis/zoekOpPolisNummer";
 
     public PolisClient(String basisUrl) {
         super(basisUrl);
@@ -50,8 +50,8 @@ public class PolisClient extends AbstractClient {
         return uitvoerenGetLijst(URL_LIJST_BEDRIJF, JsonPolis.class, bedrijfId.toString());
     }
 
-    public Long opslaan(JsonPolis jsonPolis, Long ingelogdeGebruiker, String trackAndTraceId) {
-        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, jsonPolis, ingelogdeGebruiker, trackAndTraceId));
+    public Long opslaan(JsonPolis jsonPolis, Long ingelogdeGebruiker, String trackAndTraceId, String sessie) {
+        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, jsonPolis, ingelogdeGebruiker, trackAndTraceId, sessie));
     }
 
     public void verwijder(Long id, Long ingelogdeGebruiker, String trackAndTraceId) {
