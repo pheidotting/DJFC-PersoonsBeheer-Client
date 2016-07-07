@@ -13,6 +13,7 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
     private final String URL_LIJST = "/rest/opmerking/alles";
     private final String URL_OPSLAAN = "/rest/opmerking/opslaan";
     private final String URL_VERWIJDEREN = "/rest/opmerking/verwijderen";
+    private final String URL_VERWIJDER = "/rest/opmerking/verwijder";
     private final String URL_ZOEKEN = "/rest/opmerking/zoeken";
 
     public OpmerkingClient(String basisUrl) {
@@ -62,5 +63,12 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
         System.out.println("Aanroepen " + URL_VERWIJDEREN);
 
         aanroepenUrlPostZonderBody(URL_VERWIJDEREN, ingelogdeGebruiker, trackAndTraceId, soortEntiteit, entiteitId.toString());
+    }
+
+    public void verwijder(Long id, Long ingelogdeGebruiker, String trackAndTraceId) {
+
+        System.out.println("Aanroepen " + URL_VERWIJDER);
+
+        aanroepenUrlPostZonderBody(URL_VERWIJDER, ingelogdeGebruiker, trackAndTraceId, id.toString());
     }
 }
