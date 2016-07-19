@@ -10,6 +10,7 @@ import java.util.List;
 
 public class GroepBijlagesClient extends AbstractClient {
     private final String URL_LIJST_GROEPEN = "/rest/bijlage/alleGroepen";
+    private final String URL_OPSLAAN_GROEP = "/rest/bijlage/opslaanGroep";
 
     public GroepBijlagesClient(String basisUrl) {
         super(basisUrl);
@@ -28,8 +29,8 @@ public class GroepBijlagesClient extends AbstractClient {
         return uitvoerenGetLijst(URL_LIJST_GROEPEN, JsonGroepBijlages.class, soortEntiteit, entiteitId.toString());
     }
 
-    public String opslaan(List<JsonGroepBijlages> jsonAdressen, Long ingelogdeGebruiker, String trackAndTraceId) {
-        return null;
+    public String opslaan(JsonGroepBijlages groepBijlages, Long ingelogdeGebruiker, String trackAndTraceId) {
+        return aanroepenUrlPost(URL_OPSLAAN_GROEP, groepBijlages, ingelogdeGebruiker, trackAndTraceId);
     }
 
     public void verwijder(String soortEntiteit, Long entiteitId, Long ingelogdeGebruiker, String trackAndTraceId) {
