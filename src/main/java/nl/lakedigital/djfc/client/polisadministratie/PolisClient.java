@@ -35,7 +35,7 @@ public class PolisClient extends AbstractClient {
     }
 
     public JsonPolis lees(String id) {
-        return uitvoerenGet(URL_LEES, JsonPolis.class, id);
+        return uitvoerenGet(URL_LEES + "?id=" + id, JsonPolis.class);
     }
 
     public void beeindigen(Long id, Long ingelogdeGebruiker, String trackAndTraceId) {
