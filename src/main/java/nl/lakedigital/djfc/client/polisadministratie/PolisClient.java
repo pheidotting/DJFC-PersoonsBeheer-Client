@@ -1,5 +1,6 @@
 package nl.lakedigital.djfc.client.polisadministratie;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
@@ -27,7 +28,9 @@ public class PolisClient extends AbstractClient {
     }
 
     public List<String> alleParticulierePolisSoorten() {
-        return uitvoerenGetLijst(URL_ALLE_PARTICULIERE_POLIS_SOORTEN, String.class);
+        String ret = uitvoerenGet(URL_ALLE_PARTICULIERE_POLIS_SOORTEN);
+
+        return new Gson().fromJson(ret, List.class);
     }
 
     public List<String> alleZakelijkePolisSoorten() {
