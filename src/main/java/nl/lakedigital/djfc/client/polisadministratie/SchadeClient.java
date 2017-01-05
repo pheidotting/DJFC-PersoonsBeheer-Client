@@ -5,12 +5,16 @@ import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.commons.json.JsonSchade;
 import nl.lakedigital.djfc.commons.json.JsonSoortSchade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SchadeClient extends AbstractClient {
+    private final static Logger LOGGER = LoggerFactory.getLogger(SchadeClient.class);
+
     private final String URL_OPSLAAN = basisUrl + "/rest/schade/opslaan";
     private final String URL_LIJST = basisUrl + "/rest/schade/lijst";
     private final String URL_LIJST_BEDRIJF = basisUrl + "/rest/schade/lijstBijBedrijf";
@@ -20,10 +24,11 @@ public class SchadeClient extends AbstractClient {
     private final String URL_STATUSSEN_SCHADE = basisUrl + "/rest/schade/lijstStatusSchade";
 
     public SchadeClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     public SchadeClient() {
+        super(LOGGER);
     }
 
     @Override

@@ -4,12 +4,16 @@ import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonOpmerking;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
+    private final static Logger LOGGER = LoggerFactory.getLogger(OpmerkingClient.class);
+
     private final String URL_LIJST = "/rest/opmerking/alles";
     private final String URL_OPSLAAN = "/rest/opmerking/opslaan";
     private final String URL_VERWIJDEREN = "/rest/opmerking/verwijderen";
@@ -17,10 +21,11 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
     private final String URL_ZOEKEN = "/rest/opmerking/zoeken";
 
     public OpmerkingClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     public OpmerkingClient() {
+        super(LOGGER);
     }
 
     @Override

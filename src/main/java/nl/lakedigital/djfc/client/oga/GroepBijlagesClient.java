@@ -3,20 +3,25 @@ package nl.lakedigital.djfc.client.oga;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonGroepBijlages;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroepBijlagesClient extends AbstractClient {
+    private final static Logger LOGGER = LoggerFactory.getLogger(GroepBijlagesClient.class);
+
     private final String URL_LIJST_GROEPEN = "/rest/bijlage/alleGroepen";
     private final String URL_OPSLAAN_GROEP = "/rest/bijlage/opslaanGroep";
 
     public GroepBijlagesClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     public GroepBijlagesClient() {
+        super(LOGGER);
     }
 
     @Override

@@ -8,23 +8,24 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.ClientFilter;
 import com.sun.jersey.api.json.JSONConfiguration;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 public abstract class AbstractClient {
-    protected final static Logger LOGGER = LoggerFactory.getLogger(AbstractClient.class);
+    protected static Logger LOGGER;
 
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
     protected String basisUrl;
 
-    public AbstractClient() {
+    public AbstractClient(Logger LOGGER) {
+        this.LOGGER = LOGGER;
     }
 
-    public AbstractClient(String basisUrl) {
+    public AbstractClient(String basisUrl, Logger LOGGER) {
         this.basisUrl = basisUrl;
+        this.LOGGER = LOGGER;
     }
 
     public void setBasisUrl(String basisUrl) {

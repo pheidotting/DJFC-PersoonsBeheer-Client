@@ -2,22 +2,27 @@ package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer> {
+    private final static Logger LOGGER = LoggerFactory.getLogger(RekeningClient.class);
+
     private final String URL_LIJST = "/rest/rekeningnummer/alles";
     private final String URL_OPSLAAN = "/rest/rekeningnummer/opslaan";
     private final String URL_VERWIJDEREN = "/rest/rekeningnummer/verwijderen";
     private final String URL_ZOEKEN = "/rest/rekeningnummer/zoeken";
 
     public RekeningClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     public RekeningClient() {
+        super(LOGGER);
     }
 
     @Override

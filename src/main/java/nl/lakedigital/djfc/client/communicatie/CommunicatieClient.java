@@ -31,10 +31,11 @@ public class CommunicatieClient extends AbstractClient {
     private final String URL_LEES = basisUrl + "/rest/communicatieproduct/lees";
 
     public CommunicatieClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     public CommunicatieClient() {
+        super(LOGGER);
     }
 
     @Override

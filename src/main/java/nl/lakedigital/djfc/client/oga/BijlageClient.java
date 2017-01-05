@@ -3,27 +3,33 @@ package nl.lakedigital.djfc.client.oga;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonBijlage;
 import nl.lakedigital.djfc.commons.json.WijzigenOmschrijvingBijlage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BijlageClient.class);
+
     private final String URL_LIJST = "/rest/bijlage/alles";
     private final String URL_LEES = "/rest/bijlage/lees";
     private final String URL_OPSLAAN = "/rest/bijlage/opslaan";
     private final String URL_OPSLAANEnkel = "/rest/bijlage/opslaanBijlage";
     private final String URL_VERWIJDEREN = "/rest/bijlage/verwijderen";
+    private final String URL_VERWIJDER = "/rest/bijlage/verwijder";
     private final String URL_ZOEKEN = "/rest/bijlage/zoeken";
     private final String URL_BESTANDSNAAM = "/rest/bijlage/genereerBestandsnaam";
     private final String URL_UPLOADPAD = "/rest/bijlage/getUploadPad";
     private final String URL_WIJZIG_OMSCHRIJVING_BIJLAGE = "/rest/bijlage/wijzigOmschrijvingBijlage";
 
     public BijlageClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     public BijlageClient() {
+        super(LOGGER);
     }
 
     @Override
@@ -76,6 +82,13 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
         System.out.println("Aanroepen " + URL_VERWIJDEREN);
 
         aanroepenUrlPostZonderBody(URL_VERWIJDEREN, ingelogdeGebruiker, trackAndTraceId, soortEntiteit, entiteitId.toString());
+    }
+
+    public void verwijder(Long id, Long ingelogdeGebruiker, String trackAndTraceId) {
+
+        System.out.println("Aanroepen " + URL_VERWIJDER);
+
+        aanroepenUrlPostZonderBody(URL_VERWIJDER, ingelogdeGebruiker, trackAndTraceId, id.toString());
     }
 
     public String genereerBestandsnaam() {

@@ -2,22 +2,27 @@ package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer> {
+    private final static Logger LOGGER = LoggerFactory.getLogger(TelefoonnummerClient.class);
+
     private final String URL_LIJST = "/rest/telefoonnummer/alles";
     private final String URL_OPSLAAN = "/rest/telefoonnummer/opslaan";
     private final String URL_VERWIJDEREN = "/rest/telefoonnummer/verwijderen";
     private final String URL_ZOEKEN = "/rest/telefoonnummer/zoeken";
 
     public TelefoonnummerClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     public TelefoonnummerClient() {
+        super(LOGGER);
     }
 
     @Override

@@ -3,15 +3,19 @@ package nl.lakedigital.djfc.client.dejonge;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonMedewerker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MedewerkerClient extends AbstractClient {
+    private final static Logger LOGGER = LoggerFactory.getLogger(MedewerkerClient.class);
+
     private final String URL_LEES = basisUrl + "/rest/applicaties/medewerker/lees";
 
     public MedewerkerClient(String basisUrl) {
-        super(basisUrl);
+        super(basisUrl, LOGGER);
     }
 
     @Override

@@ -10,19 +10,23 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.AbstracteJsonEntiteitMetSoortEnId;
+import org.slf4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
 import java.util.List;
 
 public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortEnId> extends AbstractClient {
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
 
-    public AbstractOgaClient() {
+    public AbstractOgaClient(Logger LOGGER) {
+        super(LOGGER);
     }
 
-    public AbstractOgaClient(String basisUrl) {
-        super(basisUrl);
+    public AbstractOgaClient(String basisUrl, Logger LOGGER) {
+        super(basisUrl, LOGGER);
     }
 
 
@@ -133,6 +137,11 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
             for (String arg : args) {
                 adres = adres + "/" + arg;
             }
+        }
+        try {
+            adres = URLEncoder.encode(adres, "UTF-8").replace("+", "%20");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         LOGGER.info("Aanroepen via GET " + basisUrl + adres);
         System.out.println("Aanroepen via GET " + basisUrl + adres);
