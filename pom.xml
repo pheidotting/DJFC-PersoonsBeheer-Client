@@ -6,7 +6,7 @@
 
     <groupId>nl.lakedigital.djfc</groupId>
     <artifactId>djfc-clients</artifactId>
-    <version>4.0</version>
+    <version>4.0.2</version>
 
     <properties>
         <spring-framework.version>4.1.7.RELEASE</spring-framework.version>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>nl.lakedigital.djfc</groupId>
             <artifactId>djfc-commons</artifactId>
-            <version>4.0</version>
+            <version>4.0.2</version>
         </dependency>
 
         <dependency>
