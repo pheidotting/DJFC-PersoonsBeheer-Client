@@ -92,6 +92,10 @@ public abstract class AbstractClient {
         webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).header("trackAndTraceId", trackAndTraceId).post();
     }
 
+    //Functie bestaat alleen tbv PowerMock
+    protected String uitvoerenGetString(String adres) {
+        return uitvoerenGet(adres);
+    }
     protected String uitvoerenGet(String adres) {
         //        adres = adres.replace("{{poort}}", bepaalPoort());
         LOGGER.info("Aanroepen via GET " + adres);
