@@ -138,11 +138,47 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
                 adres = adres + "/" + arg;
             }
         }
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
         try {
             adres = URLEncoder.encode(adres, "UTF-8").replace("+", "%20");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        System.out.println("Aanroepen via GET " + basisUrl + adres);
+
+        ClientConfig clientConfig = new DefaultClientConfig();
+        clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+        Client client = Client.create(clientConfig);
+        WebResource webResource = client.resource(basisUrl + adres);
+        ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
+        if (response.getStatus() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+        }
+
+        //        Type listOfTestObject = new TypeToken<List<T>>() {
+        //        }.getType();
+        //        return gson.fromJson(response.getEntity(String.class), listOfTestObject);
+        Type listType = getTypeToken();
+        List<T> yourClassList = new Gson().fromJson(response.getEntity(String.class), listType);
+
+        return yourClassList;
+    }
+
+    protected <T> List<T> uitvoerenGetLijstZonderEncoding(String adres, Class<T> clazz, String... args) {
+        Gson gson = builder.create();
+
+        if (args != null) {
+            for (String arg : args) {
+                adres = adres + "/" + arg;
+            }
+        }
+        //        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        //        try {
+        //            adres = URLEncoder.encode(adres, "UTF-8").replace("+", "%20");
+        //        } catch (UnsupportedEncodingException e) {
+        //            e.printStackTrace();
+        //        }
         LOGGER.info("Aanroepen via GET " + basisUrl + adres);
         System.out.println("Aanroepen via GET " + basisUrl + adres);
 

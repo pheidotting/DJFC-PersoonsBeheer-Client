@@ -8,16 +8,20 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.lang.String.join;
 
 public class AdresClient extends AbstractOgaClient<JsonAdres> {
     private final static Logger LOGGER = LoggerFactory.getLogger(AdresClient.class);
-    
+
     private final String URL_LIJST = "/rest/adres/alles";
     private final String URL_OPSLAAN = "/rest/adres/opslaan";
     private final String URL_VERWIJDEREN = "/rest/adres/verwijderen";
     private final String URL_LEES = "/rest/adres/lees";
     private final String URL_ADRES_BIJ_POSTCODE = "/rest/adres/ophalenAdresOpPostcode";
     private final String URL_ZOEKEN = "/rest/adres/zoeken";
+    private final String URL_ALLES_BIJ_ENTITEITEN = "/rest/adres/alleAdressenBijLijstMetEntiteiten";
 
     public AdresClient(String basisUrl) {
         super(basisUrl, LOGGER);
@@ -70,5 +74,10 @@ public class AdresClient extends AbstractOgaClient<JsonAdres> {
     public JsonAdres ophalenAdresOpPostcode(String postcode, String huisnummer, boolean toggle) {
         String toggleString = toggle ? "true" : "false";
         return uitvoerenGet(URL_ADRES_BIJ_POSTCODE, JsonAdres.class, postcode, huisnummer, toggleString);
+    }
+
+    public List<JsonAdres> alleAdressenBijLijstMetEntiteiten(List<Long> ids, String soortEntiteit) {
+        String idsString = join("&lijst=", ids.stream().map(aLong -> String.valueOf(aLong)).collect(Collectors.toList()));
+        return uitvoerenGetLijstZonderEncoding(URL_ALLES_BIJ_ENTITEITEN + "?soortEntiteit=" + soortEntiteit + "&lijst=" + idsString, JsonAdres.class);
     }
 }
