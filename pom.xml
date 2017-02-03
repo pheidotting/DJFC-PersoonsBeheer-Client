@@ -6,7 +6,7 @@
 
     <groupId>nl.lakedigital.djfc</groupId>
     <artifactId>djfc-clients</artifactId>
-    <version>5.0</version>
+    <version>5.1</version>
 
     <properties>
         <spring-framework.version>4.1.7.RELEASE</spring-framework.version>
@@ -19,7 +19,22 @@
         <dependency>
             <groupId>nl.lakedigital.djfc</groupId>
             <artifactId>djfc-commons</artifactId>
-            <version>4.0.2</version>
+            <version>5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.8.6</version>
         </dependency>
 
         <dependency>
