@@ -54,7 +54,15 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
 
         System.out.println("Aanroepen " + URL_ZOEKEN);
 
-        return uitvoerenGetLijst(URL_ZOEKEN, JsonBijlage.class, zoekterm);
+        List<JsonBijlage> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenBijlagesResponse.class, zoekterm).getBijlages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
@@ -64,7 +72,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
         List<JsonBijlage> result = newArrayList();
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenBijlagesResponse.class).getBijlages();
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenBijlagesResponse.class, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
         } catch (IOException e) {
             e.printStackTrace();
         }

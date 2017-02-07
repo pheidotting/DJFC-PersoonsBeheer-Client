@@ -40,7 +40,15 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
 
         System.out.println("Aanroepen " + URL_ZOEKEN);
 
-        return uitvoerenGetLijst(URL_ZOEKEN, JsonTelefoonnummer.class, zoekterm);
+        List<JsonTelefoonnummer> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenTelefoonnummersResponse.class, zoekterm).getTelefoonnummers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
@@ -50,7 +58,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
         List<JsonTelefoonnummer> result = newArrayList();
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenTelefoonnummersResponse.class).getTelefoonnummers();
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenTelefoonnummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getTelefoonnummers();
         } catch (IOException e) {
             e.printStackTrace();
         }

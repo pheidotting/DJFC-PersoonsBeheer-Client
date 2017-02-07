@@ -45,8 +45,15 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
 
     public abstract List<T> zoeken(String zoekterm);
 
-    protected D getXMLVoorLijstOGA(String uri, String soortEntiteit, Long entiteitId, Class<D> clazz) throws IOException {
-        URL url = new URL(uri + "/" + soortEntiteit + "/" + entiteitId);
+    protected D getXMLVoorLijstOGA(String uri, Class<D> clazz, String... args) throws IOException {
+        String varArgs = "";
+        if (args != null) {
+            for (String arg : args) {
+                varArgs = varArgs + "/" + arg;
+            }
+        }
+
+        URL url = new URL(uri + varArgs);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/xml");

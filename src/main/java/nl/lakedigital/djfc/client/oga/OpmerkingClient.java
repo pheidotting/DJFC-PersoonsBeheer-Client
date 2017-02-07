@@ -43,7 +43,15 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking, OpvragenOp
 
         System.out.println("Aanroepen " + URL_ZOEKEN);
 
-        return uitvoerenGetLijst(URL_ZOEKEN, JsonOpmerking.class, zoekterm);
+        List<JsonOpmerking> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenOpmerkingenResponse.class, zoekterm).getOpmerkingen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override
@@ -53,7 +61,7 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking, OpvragenOp
         List<JsonOpmerking> result = newArrayList();
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenOpmerkingenResponse.class).getOpmerkingen();
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenOpmerkingenResponse.class, soortEntiteit, String.valueOf(entiteitId)).getOpmerkingen();
         } catch (IOException e) {
             e.printStackTrace();
         }
