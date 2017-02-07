@@ -2,14 +2,18 @@ package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
+import nl.lakedigital.djfc.commons.xml.OpvragenTelefoonnummersResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer> {
+import static com.google.common.collect.Lists.newArrayList;
+
+public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, OpvragenTelefoonnummersResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(TelefoonnummerClient.class);
 
     private final String URL_LIJST = "/rest/telefoonnummer/alles";
@@ -41,10 +45,17 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer> 
 
     @Override
     public List<JsonTelefoonnummer> lijst(String soortEntiteit, Long entiteitId) {
-
         System.out.println("Aanroepen " + URL_LIJST);
 
-        return uitvoerenGetLijst(URL_LIJST, JsonTelefoonnummer.class, soortEntiteit, entiteitId.toString());
+        List<JsonTelefoonnummer> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenTelefoonnummersResponse.class).getTelefoonnummers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override

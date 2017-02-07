@@ -2,16 +2,20 @@ package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonOpmerking;
+import nl.lakedigital.djfc.commons.xml.OpvragenOpmerkingenResponse;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
+import static com.google.common.collect.Lists.newArrayList;
+
+public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking, OpvragenOpmerkingenResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(OpmerkingClient.class);
 
     private final String URL_LIJST = "/rest/opmerking/alles";
@@ -44,10 +48,17 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking> {
 
     @Override
     public List<JsonOpmerking> lijst(String soortEntiteit, Long entiteitId) {
-
         System.out.println("Aanroepen " + URL_LIJST);
 
-        return uitvoerenGetLijst(URL_LIJST, JsonOpmerking.class, soortEntiteit, entiteitId.toString());
+        List<JsonOpmerking> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenOpmerkingenResponse.class).getOpmerkingen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override

@@ -3,14 +3,18 @@ package nl.lakedigital.djfc.client.oga;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonBijlage;
 import nl.lakedigital.djfc.commons.json.WijzigenOmschrijvingBijlage;
+import nl.lakedigital.djfc.commons.xml.OpvragenBijlagesResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
+import static com.google.common.collect.Lists.newArrayList;
+
+public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlagesResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(BijlageClient.class);
 
     private final String URL_LIJST = "/rest/bijlage/alles";
@@ -55,10 +59,17 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage> {
 
     @Override
     public List<JsonBijlage> lijst(String soortEntiteit, Long entiteitId) {
-
         System.out.println("Aanroepen " + URL_LIJST);
 
-        return uitvoerenGetLijst(URL_LIJST, JsonBijlage.class, soortEntiteit, entiteitId.toString());
+        List<JsonBijlage> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenBijlagesResponse.class).getBijlages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override

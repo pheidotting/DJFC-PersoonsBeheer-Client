@@ -1,5 +1,6 @@
 package nl.lakedigital.djfc.client.oga;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.jersey.api.client.Client;
@@ -12,14 +13,20 @@ import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.AbstracteJsonEntiteitMetSoortEnId;
 import org.slf4j.Logger;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortEnId> extends AbstractClient {
+public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortEnId, D> extends AbstractClient {
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
+    protected XmlMapper mapper = new XmlMapper();
+
 
     public AbstractOgaClient(Logger LOGGER) {
         super(LOGGER);
@@ -37,6 +44,21 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
     public abstract void verwijder(String soortEntiteit, Long entiteitId, Long ingelogdeGebruiker, String trackAndTraceId);
 
     public abstract List<T> zoeken(String zoekterm);
+
+    protected D getXMLVoorLijstOGA(String uri, String soortEntiteit, Long entiteitId, Class<D> clazz) throws IOException {
+        URL url = new URL(uri + "/" + soortEntiteit + "/" + entiteitId);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/xml");
+
+        InputStream xml = connection.getInputStream();
+
+        D response = mapper.readValue(xml, clazz);
+
+        connection.disconnect();
+
+        return response;
+    }
 
     protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId) {
         Gson gson = builder.create();

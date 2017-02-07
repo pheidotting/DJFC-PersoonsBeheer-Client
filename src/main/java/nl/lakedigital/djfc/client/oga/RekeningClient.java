@@ -2,14 +2,18 @@ package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
+import nl.lakedigital.djfc.commons.xml.OpvragenRekeningNummersResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer> {
+import static com.google.common.collect.Lists.newArrayList;
+
+public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, OpvragenRekeningNummersResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(RekeningClient.class);
 
     private final String URL_LIJST = "/rest/rekeningnummer/alles";
@@ -41,10 +45,17 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer> {
 
     @Override
     public List<JsonRekeningNummer> lijst(String soortEntiteit, Long entiteitId) {
-
         System.out.println("Aanroepen " + URL_LIJST);
 
-        return uitvoerenGetLijst(URL_LIJST, JsonRekeningNummer.class, soortEntiteit, entiteitId.toString());
+        List<JsonRekeningNummer> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenRekeningNummersResponse.class).getRekeningNummers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     @Override

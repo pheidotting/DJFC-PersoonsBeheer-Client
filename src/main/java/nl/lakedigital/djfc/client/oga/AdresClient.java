@@ -2,17 +2,20 @@ package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.commons.json.JsonAdres;
+import nl.lakedigital.djfc.commons.xml.OpvragenAdressenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.String.join;
 
-public class AdresClient extends AbstractOgaClient<JsonAdres> {
+public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(AdresClient.class);
 
     private final String URL_LIJST = "/rest/adres/alles";
@@ -55,7 +58,15 @@ public class AdresClient extends AbstractOgaClient<JsonAdres> {
     public List<JsonAdres> lijst(String soortEntiteit, Long entiteitId) {
         LOGGER.debug("Aanroepen {}", URL_LIJST);
 
-        return uitvoerenGetLijst(URL_LIJST, JsonAdres.class, soortEntiteit, entiteitId.toString());
+        List<JsonAdres> result = newArrayList();
+
+        try {
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, soortEntiteit, entiteitId, OpvragenAdressenResponse.class).getAdressen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public String opslaan(List<JsonAdres> jsonAdressen, Long ingelogdeGebruiker, String trackAndTraceId) {
