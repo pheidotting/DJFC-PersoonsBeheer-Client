@@ -89,8 +89,6 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
     }
 
     protected void aanroepenUrlPostZonderBody(String adres, String trackAndTraceId, Long ingelogdeGebruiker, String... args) {
-        Gson gson = builder.create();
-
         Client client = Client.create();
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -136,13 +134,15 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
 
         Gson gson = builder.create();
 
+        StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
-                adres = adres + "/" + arg;
+                stringBuilder.append("/");
+                stringBuilder.append(arg);
             }
         }
-        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
-        System.out.println("Aanroepen via GET " + basisUrl + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
+        System.out.println("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
@@ -161,20 +161,23 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         return gson.fromJson(ret, clazz);
     }
 
-    protected <T> List<T> uitvoerenGetLijst(String adres, Class<T> clazz, String... args) {
+    protected <T> List<T> uitvoerenGetLijst(String url, Class<T> clazz, String... args) {
+        String adres = url;
+        StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
-                adres = adres + "/" + arg;
+                stringBuilder.append("/");
+                stringBuilder.append(arg);
             }
         }
-        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
         try {
             adres = URLEncoder.encode(adres, "UTF-8").replace("+", "%20");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
-        System.out.println("Aanroepen via GET " + basisUrl + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
+        System.out.println("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
