@@ -3,7 +3,6 @@ package nl.lakedigital.djfc.client.taakbeheer;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import nl.lakedigital.djfc.commons.json.OpvragenAfgerondeTakenResponse;
 import nl.lakedigital.djfc.commons.json.Taak;
-import nl.lakedigital.djfc.reflection.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,16 +46,5 @@ public class TaakClient {
         connection.disconnect();
 
         return opvragenAfgerondeTakenResponse.getTaken();
-    }
-
-    public static void main(String[] args) {
-        try {
-            System.out.println(ReflectionToStringBuilder.toString(new TaakClient("http://localhost:8080/taakbeheer").alleAfgerondeTaken("RELATIE", 6L)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
     }
 }

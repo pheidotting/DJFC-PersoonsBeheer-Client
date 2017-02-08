@@ -72,7 +72,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenAdressenResponse.class, soortEntiteit, String.valueOf(entiteitId)).getAdressen();
         } catch (IOException e) {
-            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
+            throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
 
         return result;

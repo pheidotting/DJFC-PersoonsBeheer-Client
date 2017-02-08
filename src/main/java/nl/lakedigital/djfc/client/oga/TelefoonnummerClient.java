@@ -61,7 +61,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenTelefoonnummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getTelefoonnummers();
         } catch (IOException e) {
-            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
+            throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
 
         return result;

@@ -75,7 +75,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenBijlagesResponse.class, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
         } catch (IOException e) {
-            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
+            throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
 
         return result;

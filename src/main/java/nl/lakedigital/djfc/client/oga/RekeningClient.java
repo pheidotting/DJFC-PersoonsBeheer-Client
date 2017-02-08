@@ -61,7 +61,7 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenRekeningNummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getRekeningNummers();
         } catch (IOException e) {
-            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
+            throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
 
         return result;

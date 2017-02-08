@@ -64,7 +64,7 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking, OpvragenOp
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenOpmerkingenResponse.class, soortEntiteit, String.valueOf(entiteitId)).getOpmerkingen();
         } catch (IOException e) {
-            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
+            throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
 
         return result;
