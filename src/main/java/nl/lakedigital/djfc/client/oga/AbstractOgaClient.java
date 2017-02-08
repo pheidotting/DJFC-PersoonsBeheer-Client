@@ -175,7 +175,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         try {
             adres = URLEncoder.encode(adres, "UTF-8").replace("+", "%20");
         } catch (UnsupportedEncodingException e) {
-            throw new LeesFoutException("Fout bij omzetten adres");
+            throw new LeesFoutException("Fout bij omzetten adres", e);
         }
         LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
         System.out.println("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
