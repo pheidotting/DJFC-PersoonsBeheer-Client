@@ -54,8 +54,12 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
                 stringBuilder.append(arg);
             }
         }
-
-        URL url = new URL(uri + stringBuilder.toString());
+        URL url;
+        try {
+            url = new URL(URLEncoder.encode(uri + stringBuilder.toString(), "UTF-8").replace("+", "%20"));
+        } catch (UnsupportedEncodingException e) {
+            throw new LeesFoutException("Fout bij omzetten adres", e);
+        }
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/xml");
