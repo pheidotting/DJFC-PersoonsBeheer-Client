@@ -1,6 +1,7 @@
 package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
+import nl.lakedigital.djfc.client.LeesFoutException;
 import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 import nl.lakedigital.djfc.commons.xml.OpvragenTelefoonnummersResponse;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenTelefoonnummersResponse.class, zoekterm).getTelefoonnummers();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;
@@ -60,7 +61,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenTelefoonnummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getTelefoonnummers();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;

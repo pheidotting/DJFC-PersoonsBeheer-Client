@@ -1,6 +1,7 @@
 package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
+import nl.lakedigital.djfc.client.LeesFoutException;
 import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
 import nl.lakedigital.djfc.commons.xml.OpvragenRekeningNummersResponse;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenRekeningNummersResponse.class, zoekterm).getRekeningNummers();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;
@@ -60,7 +61,7 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenRekeningNummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getRekeningNummers();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;

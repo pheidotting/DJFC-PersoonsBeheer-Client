@@ -9,6 +9,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import nl.lakedigital.djfc.client.AbstractClient;
+import nl.lakedigital.djfc.client.LeesFoutException;
 import nl.lakedigital.djfc.commons.json.JsonCommunicatieProduct;
 import nl.lakedigital.djfc.commons.json.OpslaanCommunicatieProduct;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -91,7 +92,7 @@ public class CommunicatieClient extends AbstractClient {
         WebResource webResource = client.resource(adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         JsonCommunicatieProduct yourClassList = gson.fromJson(response.getEntity(String.class), JsonCommunicatieProduct.class);
@@ -130,7 +131,7 @@ public class CommunicatieClient extends AbstractClient {
         WebResource webResource = client.resource(adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         Type listType = getTypeToken();

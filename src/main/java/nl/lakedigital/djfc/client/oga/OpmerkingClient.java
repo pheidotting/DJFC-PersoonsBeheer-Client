@@ -1,6 +1,7 @@
 package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
+import nl.lakedigital.djfc.client.LeesFoutException;
 import nl.lakedigital.djfc.commons.json.JsonOpmerking;
 import nl.lakedigital.djfc.commons.xml.OpvragenOpmerkingenResponse;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -48,7 +49,7 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking, OpvragenOp
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenOpmerkingenResponse.class, zoekterm).getOpmerkingen();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;
@@ -63,7 +64,7 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking, OpvragenOp
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenOpmerkingenResponse.class, soortEntiteit, String.valueOf(entiteitId)).getOpmerkingen();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;

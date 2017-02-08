@@ -1,6 +1,7 @@
 package nl.lakedigital.djfc.client.oga;
 
 import com.google.gson.reflect.TypeToken;
+import nl.lakedigital.djfc.client.LeesFoutException;
 import nl.lakedigital.djfc.commons.json.JsonAdres;
 import nl.lakedigital.djfc.commons.xml.OpvragenAdressenResponse;
 import org.slf4j.Logger;
@@ -50,7 +51,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenAdressenResponse.class, zoekterm).getAdressen();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;
@@ -71,7 +72,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenAdressenResponse.class, soortEntiteit, String.valueOf(entiteitId)).getAdressen();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
 
         return result;

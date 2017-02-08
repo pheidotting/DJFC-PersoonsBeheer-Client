@@ -10,6 +10,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import nl.lakedigital.djfc.client.AbstractClient;
+import nl.lakedigital.djfc.client.LeesFoutException;
 import nl.lakedigital.djfc.commons.json.AbstracteJsonEntiteitMetSoortEnId;
 import org.slf4j.Logger;
 
@@ -119,7 +120,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         String ret = response.getEntity(String.class);
@@ -151,7 +152,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         ClientResponse response;
         response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         String ret = response.getEntity(String.class);
@@ -185,7 +186,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         Type listType = getTypeToken();
@@ -211,7 +212,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         Type listType = getTypeToken();

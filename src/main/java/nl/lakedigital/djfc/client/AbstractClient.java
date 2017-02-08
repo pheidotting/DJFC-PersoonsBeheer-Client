@@ -97,7 +97,6 @@ public abstract class AbstractClient {
         return uitvoerenGet(adres);
     }
     protected String uitvoerenGet(String adres) {
-        //        adres = adres.replace("{{poort}}", bepaalPoort());
         LOGGER.info("Aanroepen via GET " + adres);
         System.out.println("Aanroepen via GET " + adres);
 
@@ -107,7 +106,7 @@ public abstract class AbstractClient {
         WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
         return response.getEntity(String.class);
     }
@@ -134,7 +133,7 @@ public abstract class AbstractClient {
         ClientResponse response;
         response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         String result = response.getEntity(String.class);
@@ -161,7 +160,7 @@ public abstract class AbstractClient {
         WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         Type listType = getTypeToken();
