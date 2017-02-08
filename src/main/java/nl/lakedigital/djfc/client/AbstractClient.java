@@ -77,17 +77,17 @@ public abstract class AbstractClient {
     }
 
     protected void aanroepenUrlPostZonderBody(String adres, Long ingelogdeGebruiker, String trackAndTraceId, String... args) {
-        Gson gson = builder.create();
-
         Client client = Client.create();
 
+        StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
-                adres = adres + "/" + arg;
+                stringBuilder.append("/");
+                stringBuilder.append(arg);
             }
         }
 
-        WebResource webResource = client.resource(basisUrl + adres);
+        WebResource webResource = client.resource(basisUrl + adres + stringBuilder.toString());
 
         webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", ingelogdeGebruiker.toString()).header("trackAndTraceId", trackAndTraceId).post();
     }
@@ -117,12 +117,14 @@ public abstract class AbstractClient {
 
         Gson gson = builder.create();
 
+        StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
-                adres = adres + "/" + arg;
+                stringBuilder.append("/");
+                stringBuilder.append(arg);
             }
         }
-        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
         System.out.println("Aanroepen via GET " + basisUrl + adres);
 
         ClientConfig clientConfig = new DefaultClientConfig();
@@ -143,8 +145,6 @@ public abstract class AbstractClient {
     }
 
     protected <T> List<T> uitvoerenGetLijst(String adres, Class<T> clazz, String... args) {
-        Gson gson = builder.create();
-
         if (args != null) {
             for (String arg : args) {
                 adres = adres + "/" + arg;
@@ -162,9 +162,6 @@ public abstract class AbstractClient {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }
 
-        //        Type listOfTestObject = new TypeToken<List<T>>() {
-        //        }.getType();
-        //        return gson.fromJson(response.getEntity(String.class), listOfTestObject);
         Type listType = getTypeToken();
         List<T> yourClassList = new Gson().fromJson(response.getEntity(String.class), listType);
 

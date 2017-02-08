@@ -72,8 +72,6 @@ public class CommunicatieClient extends AbstractClient {
             public JsonCommunicatieProduct deserialize(JsonElement json, Type pojoType, JsonDeserializationContext context) throws JsonParseException {
                 JsonObject jsonObject = json.getAsJsonObject();
                 String type = jsonObject.get("type").getAsString();
-                JsonElement element = jsonObject.get("properties");
-
 
                 try {
                     String thepackage = "nl.lakedigital.djfc.commons.json.";
@@ -106,8 +104,6 @@ public class CommunicatieClient extends AbstractClient {
             public JsonCommunicatieProduct deserialize(JsonElement json, Type pojoType, JsonDeserializationContext context) throws JsonParseException {
                 JsonObject jsonObject = json.getAsJsonObject();
                 String type = jsonObject.get("type").getAsString();
-                JsonElement element = jsonObject.get("properties");
-
 
                 try {
                     String thepackage = "nl.lakedigital.djfc.commons.json.";
@@ -118,13 +114,15 @@ public class CommunicatieClient extends AbstractClient {
             }
         }).create();
 
+        StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
-                adres = adres + "/" + arg;
+                stringBuilder.append("/");
+                stringBuilder.append(arg);
             }
         }
-        LOGGER.info("Aanroepen via GET " + adres);
-        System.out.println("Aanroepen via GET " + adres);
+        LOGGER.info("Aanroepen via GET " + adres + stringBuilder.toString());
+        System.out.println("Aanroepen via GET " + adres + stringBuilder.toString());
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
