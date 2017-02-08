@@ -145,13 +145,15 @@ public abstract class AbstractClient {
     }
 
     protected <T> List<T> uitvoerenGetLijst(String adres, Class<T> clazz, String... args) {
+        StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
-                adres = adres + "/" + arg;
+                stringBuilder.append("/");
+                stringBuilder.append(arg);
             }
         }
-        LOGGER.info("Aanroepen via GET " + basisUrl + adres);
-        System.out.println("Aanroepen via GET " + basisUrl + adres);
+        LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
+        System.out.println("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
