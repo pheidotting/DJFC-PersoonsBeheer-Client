@@ -56,7 +56,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         }
         URL url;
         try {
-            url = new URL(URLEncoder.encode(uri + stringBuilder.toString(), "UTF-8").replace("+", "%20"));
+            url = new URL(uri + URLEncoder.encode(stringBuilder.toString(), "UTF-8").replace("+", "%20"));
         } catch (UnsupportedEncodingException e) {
             throw new LeesFoutException("Fout bij omzetten adres", e);
         }
