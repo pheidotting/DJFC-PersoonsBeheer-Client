@@ -152,7 +152,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(basisUrl + adres);
+        WebResource webResource = client.resource(basisUrl + adres+ stringBuilder.toString());
         ClientResponse response;
         response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {

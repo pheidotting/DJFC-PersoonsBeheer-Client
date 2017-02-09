@@ -46,7 +46,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
 
         LOGGER.debug("Aanroepen {}", URL_ZOEKEN);
 
-        List<JsonAdres> result = newArrayList();
+        List<JsonAdres> result;
 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenAdressenResponse.class, zoekterm).getAdressen();
@@ -61,7 +61,13 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
 
         LOGGER.debug("Aanroepen {}", URL_LEES);
 
-        return uitvoerenGet(URL_LEES, JsonAdres.class, id.toString());
+        OpvragenAdressenResponse opvragenAdressenResponse;
+        try {
+            opvragenAdressenResponse = getXMLVoorLijstOGA(basisUrl + URL_LEES, OpvragenAdressenResponse.class, String.valueOf(id));
+        } catch (IOException e) {
+            throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
+        }
+        return opvragenAdressenResponse.getAdressen().get(0);
     }
 
     public List<JsonAdres> lijst(String soortEntiteit, Long entiteitId) {
