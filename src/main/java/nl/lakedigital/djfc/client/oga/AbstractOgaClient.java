@@ -73,6 +73,28 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         return response;
     }
 
+    protected D getXMLVoorLijstOGAZonderEncode(String uri, Class<D> clazz, String... args) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (args != null) {
+            for (String arg : args) {
+                stringBuilder.append("/");
+                stringBuilder.append(arg);
+            }
+        }
+        URL url = new URL(uri + stringBuilder.toString());
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/xml");
+
+        InputStream xml = connection.getInputStream();
+
+        D response = mapper.readValue(xml, clazz);
+
+        connection.disconnect();
+
+        return response;
+    }
+
     protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId) {
         Gson gson = builder.create();
 
