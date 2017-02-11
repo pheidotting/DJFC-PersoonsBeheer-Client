@@ -105,12 +105,14 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
     public List<JsonAdres> alleAdressenBijLijstMetEntiteiten(List<Long> ids, String soortEntiteit) {
         String idsString = join("&lijst=", ids.stream().map(aLong -> String.valueOf(aLong)).collect(Collectors.toList()));
 
+        String url = basisUrl + URL_ALLES_BIJ_ENTITEITEN + "?soortEntiteit=" + soortEntiteit + "&lijst=" + idsString;
+
         List<JsonAdres> result = newArrayList();
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(URL_ALLES_BIJ_ENTITEITEN + "?soortEntiteit=" + soortEntiteit + "&lijst=" + idsString, OpvragenAdressenResponse.class).getAdressen();
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class).getAdressen();
         } catch (IOException e) {
-            throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
+            throw new LeesFoutException("Fout bij lezen " + url, e);
         }
 
         return result;
