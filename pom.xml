@@ -136,7 +136,7 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>LATEST</version>
+            <version>3.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
