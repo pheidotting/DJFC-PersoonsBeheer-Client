@@ -6,7 +6,7 @@
 
     <groupId>nl.lakedigital.djfc</groupId>
     <artifactId>djfc-clients</artifactId>
-    <version>5.7</version>
+    <version>5.7-SNAPSHOT</version>
 
     <properties>
         <spring-framework.version>4.1.7.RELEASE</spring-framework.version>
@@ -14,6 +14,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <powermock.version>1.6.6</powermock.version>
     </properties>
+
+    <scm>
+        <url>scm:git:https://github.com/pheidotting/DJFC-PersoonsBeheer-Client.git/</url>
+        <developerConnection>scm:git:git@github.com/pheidotting/DJFC-PersoonsBeheer-Client.git/</developerConnection>
+    </scm>
 
     <distributionManagement>
         <repository>
@@ -145,6 +150,10 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
             </plugin>
         </plugins>
     </build>
