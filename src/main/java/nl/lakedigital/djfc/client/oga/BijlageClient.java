@@ -13,8 +13,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlagesResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(BijlageClient.class);
 
@@ -55,7 +53,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
 
         System.out.println("Aanroepen " + URL_ZOEKEN);
 
-        List<JsonBijlage> result = newArrayList();
+        List<JsonBijlage> result;
 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenBijlagesResponse.class, zoekterm).getBijlages();
@@ -70,7 +68,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
     public List<JsonBijlage> lijst(String soortEntiteit, Long entiteitId) {
         System.out.println("Aanroepen " + URL_LIJST);
 
-        List<JsonBijlage> result = newArrayList();
+        List<JsonBijlage> result;
 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenBijlagesResponse.class, soortEntiteit, String.valueOf(entiteitId)).getBijlages();

@@ -107,7 +107,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
 
         String url = basisUrl + URL_ALLES_BIJ_ENTITEITEN + "?soortEntiteit=" + soortEntiteit + "&lijst=" + idsString;
 
-        List<JsonAdres> result = newArrayList();
+        List<JsonAdres> result;
 
         try {
             result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class).getAdressen();

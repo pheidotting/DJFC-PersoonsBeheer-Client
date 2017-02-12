@@ -12,8 +12,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, OpvragenTelefoonnummersResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(TelefoonnummerClient.class);
 
@@ -41,7 +39,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
 
         System.out.println("Aanroepen " + URL_ZOEKEN);
 
-        List<JsonTelefoonnummer> result = newArrayList();
+        List<JsonTelefoonnummer> result;
 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenTelefoonnummersResponse.class, zoekterm).getTelefoonnummers();
@@ -56,7 +54,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
     public List<JsonTelefoonnummer> lijst(String soortEntiteit, Long entiteitId) {
         System.out.println("Aanroepen " + URL_LIJST);
 
-        List<JsonTelefoonnummer> result = newArrayList();
+        List<JsonTelefoonnummer> result;
 
         try {
             result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenTelefoonnummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getTelefoonnummers();
