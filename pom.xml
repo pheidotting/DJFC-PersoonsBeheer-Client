@@ -6,7 +6,7 @@
 
     <groupId>nl.lakedigital.djfc</groupId>
     <artifactId>djfc-clients</artifactId>
-    <version>5.6-SNAPSHOT</version>
+    <version>5.7-SNAPSHOT</version>
 
     <properties>
         <spring-framework.version>4.1.7.RELEASE</spring-framework.version>
@@ -17,7 +17,12 @@
 
     <distributionManagement>
         <repository>
-            <id>central</id>
+            <id>central-snapshot</id>
+            <name>jenkins-snapshot/</name>
+            <url>http://jenkins.djfc.local:8081/artifactory/libs-snapshot-local/</url>
+        </repository>
+        <repository>
+            <id>central-release</id>
             <name>jenkins-releases</name>
             <url>http://jenkins.djfc.local:8081/artifactory/libs-release-local</url>
         </repository>
