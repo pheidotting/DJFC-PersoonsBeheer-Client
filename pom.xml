@@ -17,11 +17,6 @@
 
     <distributionManagement>
         <repository>
-            <id>central-snapshot</id>
-            <name>jenkins-snapshot/</name>
-            <url>http://jenkins.djfc.local:8081/artifactory/libs-snapshot-local/</url>
-        </repository>
-        <repository>
             <id>central-release</id>
             <name>jenkins-releases</name>
             <url>http://jenkins.djfc.local:8081/artifactory/libs-release-local</url>
