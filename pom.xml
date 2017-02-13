@@ -39,7 +39,7 @@
         <dependency>
             <groupId>nl.lakedigital.djfc</groupId>
             <artifactId>djfc-commons</artifactId>
-            <version>5.1</version>
+            <version>5.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
