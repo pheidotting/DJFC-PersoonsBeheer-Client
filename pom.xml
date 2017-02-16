@@ -17,7 +17,7 @@
 
     <scm>
         <url>scm:git:https://github.com/pheidotting/DJFC-PersoonsBeheer-Client.git/</url>
-        <developerConnection>scm:github.com/pheidotting/DJFC-PersoonsBeheer-Client.git/</developerConnection>
+        <developerConnection>scm:git:github.com/pheidotting/DJFC-PersoonsBeheer-Client.git/</developerConnection>
     </scm>
 
     <distributionManagement>
