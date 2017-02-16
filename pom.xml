@@ -4,7 +4,7 @@
 
     <groupId>nl.lakedigital.djfc</groupId>
     <artifactId>djfc-clients</artifactId>
-    <version>5.21</version>
+    <version>5.22-SNAPSHOT</version>
 
     <properties>
         <spring-framework.version>4.1.7.RELEASE</spring-framework.version>
@@ -17,7 +17,7 @@
         <url>scm:git:https://github.com/pheidotting/DJFC-PersoonsBeheer-Client.git/</url>
         <developerConnection>scm:git:https://github.com/pheidotting/DJFC-PersoonsBeheer-Client.git/
         </developerConnection>
-      <tag>djfc-clients-5.21</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <distributionManagement>
