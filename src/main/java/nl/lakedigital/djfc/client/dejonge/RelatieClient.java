@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RelatieClient extends AbstractClient {
+public class RelatieClient extends AbstractClient<Object> {
     private final static Logger LOGGER = LoggerFactory.getLogger(RelatieClient.class);
 
     private final String URL_LEES = basisUrl + "/rest/applicaties/relatie/lees";

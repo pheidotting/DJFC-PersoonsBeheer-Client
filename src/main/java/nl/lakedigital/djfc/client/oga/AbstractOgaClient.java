@@ -23,7 +23,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortEnId, D> extends AbstractClient {
+public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortEnId, D> extends AbstractClient<Object> {
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
     protected XmlMapper mapper = new XmlMapper();
@@ -154,38 +154,6 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         LOGGER.debug(ret);
 
         return ret;
-    }
-
-    protected <T> T uitvoerenGet(String adres, Class<T> clazz, String... args) {
-        LOGGER.debug("uitvoerenGet");
-
-        Gson gson = builder.create();
-
-        StringBuilder stringBuilder = new StringBuilder();
-        if (args != null) {
-            for (String arg : args) {
-                stringBuilder.append("/");
-                stringBuilder.append(arg);
-            }
-        }
-        LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
-        System.out.println("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
-
-        ClientConfig clientConfig = new DefaultClientConfig();
-        clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-        Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource(basisUrl + adres+ stringBuilder.toString());
-        ClientResponse response;
-        response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
-        if (response.getStatus() != 200) {
-            throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
-        }
-
-        String ret = response.getEntity(String.class);
-
-        LOGGER.debug(ret);
-
-        return gson.fromJson(ret, clazz);
     }
 
     protected <T> List<T> uitvoerenGetLijst(String url, Class<T> clazz, String... args) {

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class KantoorClient extends AbstractClient {
+public class KantoorClient extends AbstractClient<Object> {
     private final static Logger LOGGER = LoggerFactory.getLogger(KantoorClient.class);
 
     private final String URL_LEES = basisUrl + "/rest/applicaties/kantoor/lees";

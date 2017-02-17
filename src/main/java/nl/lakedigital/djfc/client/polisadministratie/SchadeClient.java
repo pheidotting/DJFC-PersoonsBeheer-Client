@@ -50,7 +50,7 @@ public class SchadeClient extends AbstractClient {
     }
 
     public JsonSchade lees(String id) {
-        return uitvoerenGet(URL_LEES, JsonSchade.class, id);
+        return (JsonSchade) uitvoerenGet(URL_LEES, JsonSchade.class, id);
     }
 
     public void verwijder(Long id, Long ingelogdeGebruiker, String trackAndTraceId) {

@@ -45,7 +45,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
 
         System.out.println("Aanroepen " + URL_LEES);
 
-        return uitvoerenGet(URL_LEES, JsonBijlage.class, id.toString());
+        return (JsonBijlage) uitvoerenGet(URL_LEES, JsonBijlage.class, id.toString());
     }
 
     @Override
@@ -110,11 +110,11 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
     }
 
     public String genereerBestandsnaam() {
-        return uitvoerenGet(URL_BESTANDSNAAM, String.class);
+        return (String) uitvoerenGet(URL_BESTANDSNAAM, String.class);
     }
 
     public String getUploadPad() {
-        return uitvoerenGet(URL_UPLOADPAD, String.class);
+        return (String) uitvoerenGet(URL_UPLOADPAD, String.class);
     }
 
     public void wijzigOmschrijvingBijlage(WijzigenOmschrijvingBijlage wijzigenOmschrijvingBijlage, Long ingelogdeGebruiker, String trackAndTraceId) {
