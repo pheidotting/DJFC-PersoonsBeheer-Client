@@ -1,9 +1,9 @@
 package nl.lakedigital.djfc.client.polisadministratie;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
+import nl.lakedigital.djfc.commons.xml.OpvragenPolisSoortenResponse;
 import nl.lakedigital.djfc.commons.xml.OpvragenPolissenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +31,11 @@ public class PolisClient extends AbstractClient {
     }
 
     public List<String> alleParticulierePolisSoorten() {
-        String ret = uitvoerenGet(URL_ALLE_PARTICULIERE_POLIS_SOORTEN);
-
-        return new Gson().fromJson(ret, List.class);
+        return ((OpvragenPolisSoortenResponse) getXML(URL_ALLE_PARTICULIERE_POLIS_SOORTEN, OpvragenPolisSoortenResponse.class, false)).getPolisSoorten();
     }
 
     public List<String> alleZakelijkePolisSoorten() {
-        return uitvoerenGetLijst(URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN, String.class);
+        return ((OpvragenPolisSoortenResponse) getXML(URL_ALLE_PARTICULIERE_ZAKELIJKE_SOORTEN, OpvragenPolisSoortenResponse.class, false)).getPolisSoorten();
     }
 
     public JsonPolis lees(String id) {
