@@ -4,7 +4,7 @@
 
     <groupId>nl.lakedigital.djfc</groupId>
     <artifactId>djfc-clients</artifactId>
-    <version>5.125</version>
+    <version>5.125-SNAPSHOT</version>
 
     <properties>
         <spring-framework.version>4.1.7.RELEASE</spring-framework.version>
