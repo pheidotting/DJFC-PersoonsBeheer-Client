@@ -67,7 +67,7 @@ public abstract class AbstractClient<D> {
 
             return response;
         } catch (IOException e) {
-            throw new LeesFoutException("Fout bij omzetten adres", e);
+            throw new LeesFoutException("Fout bij omzetten xml", e);
         }
     }
 
