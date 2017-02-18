@@ -53,7 +53,7 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
     }
 
     public JsonSchade lees(String id) {
-        return (JsonSchade) uitvoerenGet(URL_LEES, JsonSchade.class, id);
+        return getXML(URL_LEES, OpvragenSchadesResponse.class, false, String.valueOf(id)).getSchades().get(0);
     }
 
     @Deprecated
