@@ -17,13 +17,13 @@ import java.util.List;
 public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(SchadeClient.class);
 
-    private final String URL_OPSLAAN = basisUrl + "/rest/schade/opslaan";
-    private final String URL_LIJST = basisUrl + "/rest/schade/lijst";
-    private final String URL_LIJST_BEDRIJF = basisUrl + "/rest/schade/lijstBijBedrijf";
-    private final String URL_LEES = basisUrl + "/rest/schade/lees";
-    private final String URL_VERWIJDER = basisUrl + "/rest/schade/verwijder";
-    private final String URL_SOORTEN_SCHADE = basisUrl + "/rest/schade/soortenSchade";
-    private final String URL_STATUSSEN_SCHADE = basisUrl + "/rest/schade/lijstStatusSchade";
+    private final String URL_OPSLAAN = "/rest/schade/opslaan";
+    private final String URL_LIJST = "/rest/schade/lijst";
+    private final String URL_LIJST_BEDRIJF = "/rest/schade/lijstBijBedrijf";
+    private final String URL_LEES = "/rest/schade/lees";
+    private final String URL_VERWIJDER = "/rest/schade/verwijder";
+    private final String URL_SOORTEN_SCHADE = "/rest/schade/soortenSchade";
+    private final String URL_STATUSSEN_SCHADE = "/rest/schade/lijstStatusSchade";
 
     public SchadeClient(String basisUrl) {
         super(basisUrl, LOGGER);
