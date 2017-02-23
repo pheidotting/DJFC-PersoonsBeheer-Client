@@ -3,11 +3,15 @@ package nl.lakedigital.djfc.client.identificatie;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.Identificatie;
 import nl.lakedigital.djfc.commons.json.ZoekIdentificatieResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 public class IdentificatieClient extends AbstractClient<ZoekIdentificatieResponse> {
+    private final static Logger LOGGER = LoggerFactory.getLogger(IdentificatieClient.class);
+
     public IdentificatieClient(String basisUrl) {
         super(basisUrl, LOGGER);
     }
@@ -24,6 +28,9 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
     public Identificatie zoekIdentificatie(String soortEntiteit, Long entiteitId) {
         List<Identificatie> lijst = getXML("/rest/identificatie/zoeken", ZoekIdentificatieResponse.class, false, soortEntiteit, String.valueOf(entiteitId)).getIdentificaties();
 
-        return lijst.get(0);
+        if (!lijst.isEmpty()) {
+            return lijst.get(0);
+        }
+        return null;
     }
 }
