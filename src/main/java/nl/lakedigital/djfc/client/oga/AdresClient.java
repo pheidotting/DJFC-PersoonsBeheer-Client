@@ -7,6 +7,7 @@ import nl.lakedigital.djfc.commons.xml.OpvragenAdressenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -26,6 +27,10 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
     private final String URL_ADRES_BIJ_POSTCODE = "/rest/adres/ophalenAdresOpPostcode";
     private final String URL_ZOEKEN = "/rest/adres/zoeken";
     private final String URL_ALLES_BIJ_ENTITEITEN = "/rest/adres/alleAdressenBijLijstMetEntiteiten";
+
+    private final String URL_ZOEK_OP_POSTCODE = "/rest/adres/zoekOpPostcode";
+    private final String URL_ZOEK_OP_ADRES = "/rest/adres/zoekOpAdres";
+    private final String URL_ZOEK_OP_PLAATS = "/rest/adres/zoekOpPlaats";
 
     public AdresClient(String basisUrl) {
         super(basisUrl, LOGGER);
@@ -111,6 +116,46 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
 
         try {
             result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class).getAdressen();
+        } catch (IOException e) {
+            throw new LeesFoutException("Fout bij lezen " + url, e);
+        }
+
+        return result;
+    }
+
+    public List<JsonAdres> zoekOpAdres( String zoekTerm) {
+        String url = basisUrl + URL_ZOEK_OP_ADRES;
+
+        List<JsonAdres> result;
+
+        try {
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class,zoekTerm).getAdressen();
+        } catch (IOException e) {
+            throw new LeesFoutException("Fout bij lezen " + url, e);
+        }
+
+        return result;
+    }
+    public List<JsonAdres> zoekOpPostcode( String zoekTerm) {
+        String url = basisUrl + URL_ZOEK_OP_POSTCODE;
+
+        List<JsonAdres> result;
+
+        try {
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class,zoekTerm).getAdressen();
+        } catch (IOException e) {
+            throw new LeesFoutException("Fout bij lezen " + url, e);
+        }
+
+        return result;
+    }
+    public List<JsonAdres> zoekOpPlaats( String zoekTerm) {
+        String url = basisUrl + URL_ZOEK_OP_PLAATS;
+
+        List<JsonAdres> result;
+
+        try {
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class,zoekTerm).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + url, e);
         }
