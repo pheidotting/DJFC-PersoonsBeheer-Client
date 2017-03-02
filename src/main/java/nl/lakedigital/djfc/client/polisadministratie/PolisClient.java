@@ -56,14 +56,10 @@ public class PolisClient extends AbstractClient {
         return ((OpvragenPolissenResponse) getXML(URL_LIJST_BEDRIJF, OpvragenPolissenResponse.class, false, String.valueOf(bedrijfId))).getPolissen();
     }
 
-    public JsonPolis zoekOpPolisNummer(String polisNummer) {
-        JsonPolis polis = null;
+    public List<JsonPolis> zoekOpPolisNummer(String polisNummer) {
         OpvragenPolissenResponse response = ((OpvragenPolissenResponse) getXML(URL_ZOEK_OP_POLISNUMMER, OpvragenPolissenResponse.class, false, polisNummer));
-        if (!response.getPolissen().isEmpty()) {
-            polis = response.getPolissen().get(0);
-        }
 
-        return polis;
+        return response.getPolissen();
     }
 
     @Override

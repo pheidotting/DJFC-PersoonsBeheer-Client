@@ -24,6 +24,7 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
     private final String URL_VERWIJDER = "/rest/schade/verwijder";
     private final String URL_SOORTEN_SCHADE = "/rest/schade/soortenSchade";
     private final String URL_STATUSSEN_SCHADE = "/rest/schade/lijstStatusSchade";
+    private final String URL_ZOEK_OP_SCHADENUMMER_MAATSCHAPPIJE = "/rest/schade/zoekOpSchadeNummerMaatschappij";
 
     public SchadeClient(String basisUrl) {
         super(basisUrl, LOGGER);
@@ -50,6 +51,10 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
 
     public List<JsonSchade> lijstBijBedrijf(Long bedrijfId) {
         return getXML(URL_LIJST_BEDRIJF, OpvragenSchadesResponse.class, false, String.valueOf(bedrijfId)).getSchades();
+    }
+
+    public List<JsonSchade> zoekOpSchadeNummerMaatschappij(String schadeNummerMaatschappij) {
+        return getXML(URL_ZOEK_OP_SCHADENUMMER_MAATSCHAPPIJE, OpvragenSchadesResponse.class, false, schadeNummerMaatschappij).getSchades();
     }
 
     public JsonSchade lees(String id) {
