@@ -7,7 +7,6 @@ import nl.lakedigital.djfc.commons.xml.OpvragenAdressenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -104,7 +103,16 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
 
     public JsonAdres ophalenAdresOpPostcode(String postcode, String huisnummer, boolean toggle) {
         String toggleString = toggle ? "true" : "false";
-        return uitvoerenGet(URL_ADRES_BIJ_POSTCODE, JsonAdres.class, postcode, huisnummer, toggleString);
+
+        List<JsonAdres> result;
+
+        try {
+            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_ADRES_BIJ_POSTCODE, OpvragenAdressenResponse.class, postcode, huisnummer, toggleString).getAdressen();
+        } catch (IOException e) {
+            throw new LeesFoutException("Fout bij lezen " + basisUrl + URL_ADRES_BIJ_POSTCODE, e);
+        }
+
+        return result.isEmpty() ? new JsonAdres() : result.get(0);
     }
 
     public List<JsonAdres> alleAdressenBijLijstMetEntiteiten(List<Long> ids, String soortEntiteit) {

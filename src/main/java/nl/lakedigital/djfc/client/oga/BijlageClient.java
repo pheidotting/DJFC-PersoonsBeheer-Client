@@ -42,10 +42,17 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
     }
 
     public JsonBijlage lees(Long id) {
+        LOGGER.debug("Aanroepen {}", basisUrl + URL_LEES);
 
-        System.out.println("Aanroepen " + URL_LEES);
+        List<JsonBijlage> result;
 
-        return (JsonBijlage) uitvoerenGet(URL_LEES, JsonBijlage.class, id.toString());
+        try {
+            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_LEES, OpvragenBijlagesResponse.class, String.valueOf(id)).getBijlages();
+        } catch (IOException e) {
+            throw new LeesFoutException("Fout bij lezen " + basisUrl + URL_LEES, e);
+        }
+
+        return result.get(0);
     }
 
     @Override
@@ -71,7 +78,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
         List<JsonBijlage> result;
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenBijlagesResponse.class, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
+            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_LIJST, OpvragenBijlagesResponse.class, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }

@@ -56,7 +56,9 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         }
         URL url;
         try {
-            url = new URL(uri + URLEncoder.encode(stringBuilder.toString(), "UTF-8").replace("+", "%20"));
+            String urlString = uri + URLEncoder.encode(stringBuilder.toString(), "UTF-8").replace("+", "%20");
+            LOGGER.debug("Aanroepen {}", urlString);
+            url = new URL(urlString);
         } catch (UnsupportedEncodingException e) {
             throw new LeesFoutException("Fout bij omzetten adres", e);
         }
@@ -81,7 +83,9 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
                 stringBuilder.append(arg);
             }
         }
-        URL url = new URL(uri + stringBuilder.toString());
+        String urlString = uri + stringBuilder.toString();
+        LOGGER.debug("Aanroepen {}", urlString);
+        URL url = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/xml");

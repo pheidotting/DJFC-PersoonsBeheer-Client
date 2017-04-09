@@ -1,8 +1,10 @@
 package nl.lakedigital.djfc.client.identificatie;
 
+import com.google.gson.Gson;
 import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.Identificatie;
 import nl.lakedigital.djfc.commons.json.ZoekIdentificatieResponse;
+import nl.lakedigital.djfc.request.EntiteitenOpgeslagenRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,5 +34,18 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
             return lijst.get(0);
         }
         return null;
+    }
+
+    public Identificatie zoekIdentificatieCode(String identificatieCode) {
+        List<Identificatie> lijst = getXML("/rest/identificatie/zoekenOpCode", ZoekIdentificatieResponse.class, false, identificatieCode).getIdentificaties();
+
+        if (!lijst.isEmpty()) {
+            return lijst.get(0);
+        }
+        return null;
+    }
+
+    public nl.lakedigital.djfc.commons.json.Identificatie opslaan(EntiteitenOpgeslagenRequest entiteitenOpgeslagenRequest) {
+        return new Gson().fromJson(aanroepenUrlPost("/rest/identificatie/opslaan", entiteitenOpgeslagenRequest, 0L, ""), nl.lakedigital.djfc.commons.json.Identificatie.class);
     }
 }
