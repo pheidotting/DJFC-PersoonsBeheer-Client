@@ -25,6 +25,8 @@ public class Relatie {
     private List<Opmerking> opmerkingen;
     private List<TelefoonnummerMetGesprekken> telefoonnummerMetGesprekkens;
 
+    private List<Polis> polissen;
+
     public String getIdentificatie() {
         return identificatie;
     }
@@ -196,5 +198,16 @@ public class Relatie {
 
     public void setTelefoonnummerMetGesprekkens(List<TelefoonnummerMetGesprekken> telefoonnummerMetGesprekkens) {
         this.telefoonnummerMetGesprekkens = telefoonnummerMetGesprekkens;
+    }
+
+    public List<Polis> getPolissen() {
+        if (polissen == null) {
+            polissen = new ArrayList<>();
+        }
+        return polissen;
+    }
+
+    public void setPolissen(List<Polis> polissen) {
+        this.polissen = polissen;
     }
 }
