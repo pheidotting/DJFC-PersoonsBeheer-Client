@@ -32,7 +32,7 @@ public class Polis {
     private List<Opmerking> opmerkingen = newArrayList();
 
     public String getIdentificatie() {
-        Polis return identificatie;
+        return identificatie;
     }
 
     public void setIdentificatie(String identificatie) {
