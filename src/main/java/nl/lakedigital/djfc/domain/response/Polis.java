@@ -1,5 +1,6 @@
 package nl.lakedigital.djfc.domain.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -26,6 +27,8 @@ public class Polis {
     private String omschrijvingVerzekering;
     private String soortEntiteit;
     private Long entiteitId;
+
+    private List<Schade> schades;
 
     private List<Bijlage> bijlages = newArrayList();
     private List<GroepBijlages> groepBijlages = newArrayList();
@@ -197,6 +200,17 @@ public class Polis {
 
     public void setEntiteitId(Long entiteitId) {
         this.entiteitId = entiteitId;
+    }
+
+    public List<Schade> getSchades() {
+        if (schades == null) {
+            schades = new ArrayList<>();
+        }
+        return schades;
+    }
+
+    public void setSchades(List<Schade> schades) {
+        this.schades = schades;
     }
 
     public List<Bijlage> getBijlages() {
