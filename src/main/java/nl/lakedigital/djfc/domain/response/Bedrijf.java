@@ -19,6 +19,7 @@ public class Bedrijf {
     private List<Telefoonnummer> telefoonnummers = new ArrayList<>();
     private List<Opmerking> opmerkingen = new ArrayList<>();
     private List<TelefoonnummerMetGesprekken> telefoonnummerMetGesprekkens = new ArrayList<>();
+    private List<Polis> polissen = new ArrayList<>();
 
     public String getIdentificatie() {
         return identificatie;
@@ -130,5 +131,13 @@ public class Bedrijf {
 
     public void setTelefoonnummerMetGesprekkens(List<TelefoonnummerMetGesprekken> telefoonnummerMetGesprekkens) {
         this.telefoonnummerMetGesprekkens = telefoonnummerMetGesprekkens;
+    }
+
+    public List<Polis> getPolissen() {
+        return polissen;
+    }
+
+    public void setPolissen(List<Polis> polissen) {
+        this.polissen = polissen;
     }
 }

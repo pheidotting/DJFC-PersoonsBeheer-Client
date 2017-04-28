@@ -24,7 +24,6 @@ public class Relatie {
     private List<Telefoonnummer> telefoonnummers;
     private List<Opmerking> opmerkingen;
     private List<TelefoonnummerMetGesprekken> telefoonnummerMetGesprekkens;
-
     private List<Polis> polissen;
 
     public String getIdentificatie() {
