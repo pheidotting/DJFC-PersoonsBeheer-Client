@@ -20,6 +20,7 @@ public class Bedrijf {
     private List<Opmerking> opmerkingen = new ArrayList<>();
     private List<TelefoonnummerMetGesprekken> telefoonnummerMetGesprekkens = new ArrayList<>();
     private List<Polis> polissen = new ArrayList<>();
+    private List<ContactPersoon> contactPersoons = new ArrayList<>();
 
     public String getIdentificatie() {
         return identificatie;
@@ -139,5 +140,13 @@ public class Bedrijf {
 
     public void setPolissen(List<Polis> polissen) {
         this.polissen = polissen;
+    }
+
+    public List<ContactPersoon> getContactPersoons() {
+        return contactPersoons;
+    }
+
+    public void setContactPersoons(List<ContactPersoon> contactPersoons) {
+        this.contactPersoons = contactPersoons;
     }
 }

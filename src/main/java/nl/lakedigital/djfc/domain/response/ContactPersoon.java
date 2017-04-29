@@ -1,35 +1,25 @@
 package nl.lakedigital.djfc.domain.response;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ContactPersoon {
+import static com.google.common.collect.Lists.newArrayList;
 
-    private Long id;
-    private String wachtwoord;
+public class ContactPersoon {
+    private Long identificatie;
     private String voornaam;
     private String tussenvoegsel;
     private String achternaam;
     private String emailadres;
-    private Long bedrijf;
     private String functie;
-    private List<Telefoonnummer> telefoonnummers;
+    private List<Telefoonnummer> telefoonnummers = newArrayList();
 
-    public Long getId() {
-        return id;
+    public Long getIdentificatie() {
+        return identificatie;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getWachtwoord() {
-        return wachtwoord;
-    }
-
-    public void setWachtwoord(String wachtwoord) {
-        this.wachtwoord = wachtwoord;
+    public void setIdentificatie(Long identificatie) {
+        this.identificatie = identificatie;
     }
 
     public String getVoornaam() {
@@ -64,14 +54,6 @@ public class ContactPersoon {
         this.emailadres = emailadres;
     }
 
-    public Long getBedrijf() {
-        return bedrijf;
-    }
-
-    public void setBedrijf(Long bedrijf) {
-        this.bedrijf = bedrijf;
-    }
-
     public String getFunctie() {
         return functie;
     }
@@ -81,9 +63,6 @@ public class ContactPersoon {
     }
 
     public List<Telefoonnummer> getTelefoonnummers() {
-        if (telefoonnummers == null) {
-            telefoonnummers = new ArrayList<>();
-        }
         return telefoonnummers;
     }
 
