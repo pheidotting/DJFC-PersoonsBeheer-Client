@@ -6,7 +6,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 public class ContactPersoon {
-    private Long identificatie;
+    private String identificatie;
     private String voornaam;
     private String tussenvoegsel;
     private String achternaam;
@@ -14,11 +14,11 @@ public class ContactPersoon {
     private String functie;
     private List<Telefoonnummer> telefoonnummers = newArrayList();
 
-    public Long getIdentificatie() {
+    public String getIdentificatie() {
         return identificatie;
     }
 
-    public void setIdentificatie(Long identificatie) {
+    public void setIdentificatie(String identificatie) {
         this.identificatie = identificatie;
     }
 
