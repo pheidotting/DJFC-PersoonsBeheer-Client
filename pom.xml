@@ -4,7 +4,7 @@
 
     <groupId>nl.lakedigital.djfc</groupId>
     <artifactId>djfc-clients</artifactId>
-    <version>5.44</version>
+    <version>5.45</version>
 
     <properties>
         <spring-framework.version>4.1.7.RELEASE</spring-framework.version>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>nl.lakedigital.djfc</groupId>
             <artifactId>djfc-commons</artifactId>
-            <version>5.27</version>
+            <version>5.28</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
