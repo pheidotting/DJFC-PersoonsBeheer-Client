@@ -60,6 +60,10 @@ public abstract class AbstractClient<D> {
             connection.setRequestProperty("Accept", "application/xml");
 
             InputStream xml = connection.getInputStream();
+            //            StringWriter writer = new StringWriter();
+            //            IOUtils.copy(xml, writer);
+            //            String theString = writer.toString();
+            //            LOGGER.debug(theString);
 
             D response = mapper.readValue(xml, clazz);
 
