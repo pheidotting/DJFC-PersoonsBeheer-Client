@@ -5,11 +5,16 @@ import nl.lakedigital.djfc.client.AbstractClient;
 import nl.lakedigital.djfc.commons.json.Identificatie;
 import nl.lakedigital.djfc.commons.json.ZoekIdentificatieResponse;
 import nl.lakedigital.djfc.request.EntiteitenOpgeslagenRequest;
+import nl.lakedigital.djfc.request.SoortEntiteitEnEntiteitId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.lang.String.join;
 
 public class IdentificatieClient extends AbstractClient<ZoekIdentificatieResponse> {
     private final static Logger LOGGER = LoggerFactory.getLogger(IdentificatieClient.class);
@@ -43,6 +48,21 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
             return lijst.get(0);
         }
         return null;
+    }
+
+    public List<Identificatie> zoekIdentificatieCodes(List<SoortEntiteitEnEntiteitId> soortenEntiteitEnEntiteitId) {
+        String idsString = join("&zoekterm=", soortenEntiteitEnEntiteitId.stream().map(new Function<SoortEntiteitEnEntiteitId, String>() {
+            @Override
+            public String apply(SoortEntiteitEnEntiteitId soortEntiteitEnEntiteitId) {
+                return soortEntiteitEnEntiteitId.getSoortEntiteit() + "," + soortEntiteitEnEntiteitId.getEntiteitId();
+            }
+        }).collect(Collectors.toList()));
+
+        LOGGER.debug(idsString);
+
+        List<Identificatie> lijst = getXML("/rest/identificatie/zoekenMeerdere", ZoekIdentificatieResponse.class, false, idsString).getIdentificaties();
+
+        return lijst;
     }
 
     public nl.lakedigital.djfc.commons.json.Identificatie opslaan(EntiteitenOpgeslagenRequest entiteitenOpgeslagenRequest) {
