@@ -60,10 +60,6 @@ public abstract class AbstractClient<D> {
             connection.setRequestProperty("Accept", "application/xml");
 
             InputStream xml = connection.getInputStream();
-            //            StringWriter writer = new StringWriter();
-            //            IOUtils.copy(xml, writer);
-            //            String theString = writer.toString();
-            //            LOGGER.debug(theString);
 
             D response = mapper.readValue(xml, clazz);
 
@@ -71,6 +67,7 @@ public abstract class AbstractClient<D> {
 
             return response;
         } catch (IOException e) {
+            LOGGER.error("Fout bij omzetten xml {}", e);
             throw new LeesFoutException("Fout bij omzetten xml", e);
         }
     }
@@ -154,6 +151,7 @@ public abstract class AbstractClient<D> {
         WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
+            LOGGER.error("Failed : HTTP error code : " + response.getStatus());
             throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
         return response.getEntity(String.class);
@@ -173,7 +171,6 @@ public abstract class AbstractClient<D> {
             }
         }
         LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
-        System.out.println("Aanroepen via GET " + basisUrl + adres);
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
@@ -182,12 +179,13 @@ public abstract class AbstractClient<D> {
         ClientResponse response;
         response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
+            LOGGER.error("Failed : HTTP error code : " + response.getStatus());
             throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
         String result = response.getEntity(String.class);
 
-        System.out.println(result);
+        LOGGER.debug("Result : {}", result);
 
         return gson.fromJson(result, clazz);
     }
@@ -202,7 +200,6 @@ public abstract class AbstractClient<D> {
             }
         }
         LOGGER.info("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
-        System.out.println("Aanroepen via GET " + basisUrl + adres + stringBuilder.toString());
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
@@ -210,6 +207,7 @@ public abstract class AbstractClient<D> {
         WebResource webResource = client.resource(basisUrl + adres);
         ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
+            LOGGER.error("Failed : HTTP error code : " + response.getStatus());
             throw new LeesFoutException("Failed : HTTP error code : " + response.getStatus());
         }
 
