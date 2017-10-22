@@ -23,12 +23,9 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
     private final String URL_ZOEKEN = "/rest/rekeningnummer/zoeken";
 
     public RekeningClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
-    public RekeningClient() {
-        super(LOGGER);
-    }
 
     @Override
     protected Type getTypeToken() {
@@ -44,7 +41,7 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
         List<JsonRekeningNummer> result = newArrayList();
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenRekeningNummersResponse.class, zoekterm).getRekeningNummers();
+            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenRekeningNummersResponse.class, LOGGER, zoekterm).getRekeningNummers();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
@@ -59,7 +56,7 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
         List<JsonRekeningNummer> result = newArrayList();
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenRekeningNummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getRekeningNummers();
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenRekeningNummersResponse.class, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getRekeningNummers();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
@@ -72,7 +69,7 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
 
         System.out.println("Aanroepen " + URL_OPSLAAN);
 
-        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, ingelogdeGebruiker, trackAndTraceId);
+        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, ingelogdeGebruiker, trackAndTraceId, LOGGER);
     }
 
     @Override

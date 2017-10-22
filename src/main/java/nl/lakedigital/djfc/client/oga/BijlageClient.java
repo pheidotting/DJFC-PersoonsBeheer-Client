@@ -28,12 +28,9 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
     private final String URL_WIJZIG_OMSCHRIJVING_BIJLAGE = "/rest/bijlage/wijzigOmschrijvingBijlage";
 
     public BijlageClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
-    public BijlageClient() {
-        super(LOGGER);
-    }
 
     @Override
     protected Type getTypeToken() {
@@ -47,7 +44,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
         List<JsonBijlage> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_LEES, OpvragenBijlagesResponse.class, String.valueOf(id)).getBijlages();
+            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_LEES, OpvragenBijlagesResponse.class, LOGGER, String.valueOf(id)).getBijlages();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + basisUrl + URL_LEES, e);
         }
@@ -63,7 +60,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
         List<JsonBijlage> result;
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenBijlagesResponse.class, zoekterm).getBijlages();
+            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenBijlagesResponse.class, LOGGER, zoekterm).getBijlages();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
@@ -78,7 +75,7 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
         List<JsonBijlage> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_LIJST, OpvragenBijlagesResponse.class, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
+            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_LIJST, OpvragenBijlagesResponse.class, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
@@ -91,14 +88,14 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
 
         System.out.println("Aanroepen " + URL_OPSLAAN);
 
-        return aanroepenUrlPost(URL_OPSLAAN, bijlages, ingelogdeGebruiker, trackAndTraceId);
+        return aanroepenUrlPost(URL_OPSLAAN, bijlages, ingelogdeGebruiker, trackAndTraceId, LOGGER);
     }
 
     public String opslaan(JsonBijlage bijlage, Long ingelogdeGebruiker, String trackAndTraceId) {
 
         System.out.println("Aanroepen " + URL_OPSLAAN);
 
-        return aanroepenUrlPost(URL_OPSLAAN, bijlage, ingelogdeGebruiker, trackAndTraceId);
+        return aanroepenUrlPost(URL_OPSLAAN, bijlage, ingelogdeGebruiker, trackAndTraceId, LOGGER);
     }
 
     @Override
@@ -117,14 +114,14 @@ public class BijlageClient extends AbstractOgaClient<JsonBijlage, OpvragenBijlag
     }
 
     public String genereerBestandsnaam() {
-        return (String) uitvoerenGet(URL_BESTANDSNAAM, String.class);
+        return (String) uitvoerenGet(URL_BESTANDSNAAM, String.class, LOGGER);
     }
 
     public String getUploadPad() {
-        return (String) uitvoerenGet(URL_UPLOADPAD, String.class);
+        return (String) uitvoerenGet(URL_UPLOADPAD, String.class, LOGGER);
     }
 
     public void wijzigOmschrijvingBijlage(WijzigenOmschrijvingBijlage wijzigenOmschrijvingBijlage, Long ingelogdeGebruiker, String trackAndTraceId) {
-        aanroepenUrlPost(URL_WIJZIG_OMSCHRIJVING_BIJLAGE, wijzigenOmschrijvingBijlage, ingelogdeGebruiker, trackAndTraceId);
+        aanroepenUrlPost(URL_WIJZIG_OMSCHRIJVING_BIJLAGE, wijzigenOmschrijvingBijlage, ingelogdeGebruiker, trackAndTraceId, LOGGER);
     }
 }

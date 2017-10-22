@@ -18,7 +18,7 @@ public class RelatieClient extends AbstractClient<Object> {
     private final String URL_ZOEK_OP_NAAM = basisUrl + "/rest/applicaties/relatie/zoekOpNaam";
 
     public RelatieClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
     @Override
@@ -31,18 +31,18 @@ public class RelatieClient extends AbstractClient<Object> {
 
         System.out.println("Aanroepen " + URL_LEES);
 
-        return uitvoerenGet(URL_LEES, JsonRelatie.class, id.toString());
+        return uitvoerenGet(URL_LEES, JsonRelatie.class, LOGGER, id.toString());
     }
 
     public JsonRelatie zoekOpEmailadres(String emailadres) {
         System.out.println("Aanroepen " + URL_ZOEK_OP_EMAILADRES);
 
-        return uitvoerenGet(URL_ZOEK_OP_EMAILADRES, JsonRelatie.class, emailadres, "dummy");
+        return uitvoerenGet(URL_ZOEK_OP_EMAILADRES, JsonRelatie.class, LOGGER, emailadres, "dummy");
     }
 
     public List<JsonRelatie> zoekOpNaam(String naam) {
         System.out.println("Aanroepen " + URL_ZOEK_OP_NAAM);
 
-        return uitvoerenGetLijst(URL_ZOEK_OP_NAAM, JsonRelatie.class, naam);
+        return uitvoerenGetLijst(URL_ZOEK_OP_NAAM, JsonRelatie.class, LOGGER, naam);
     }
 }

@@ -19,28 +19,21 @@ import java.net.URLEncoder;
 import java.util.List;
 
 public abstract class AbstractClient<D> {
-    protected static Logger LOGGER;
-
     private GsonBuilder builder = new GsonBuilder();
     protected Gson gson = new Gson();
     protected String basisUrl;
     protected XmlMapper mapper = new XmlMapper();
 
-    public AbstractClient(Logger LOGGER) {
-        this.LOGGER = LOGGER;
-    }
-
-    public AbstractClient(String basisUrl, Logger LOGGER) {
+    public AbstractClient(String basisUrl) {
         this.basisUrl = basisUrl;
-        this.LOGGER = LOGGER;
     }
 
-    public void setBasisUrl(String basisUrl) {
+    public void setBasisUrl(String basisUrl, Logger LOGGER) {
         LOGGER.debug("zet basisurl {}", basisUrl);
         this.basisUrl = basisUrl;
     }
 
-    protected D getXML(String uri, Class<D> clazz, boolean urlEncoden, String... args) {
+    protected D getXML(String uri, Class<D> clazz, boolean urlEncoden, Logger LOGGER, String... args) {
         StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
@@ -73,7 +66,7 @@ public abstract class AbstractClient<D> {
     }
 
     @Deprecated
-    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId) {
+    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId, Logger LOGGER) {
         Gson gson = builder.create();
 
         Client client = Client.create();
@@ -88,7 +81,7 @@ public abstract class AbstractClient<D> {
     }
 
     @Deprecated
-    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId, String sessie) {
+    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId, String sessie, Logger LOGGER) {
         Gson gson = builder.create();
 
         Client client = Client.create();
@@ -136,12 +129,12 @@ public abstract class AbstractClient<D> {
 
     //Functie bestaat alleen tbv PowerMock
     @Deprecated
-    protected String uitvoerenGetString(String adres) {
-        return uitvoerenGet(adres);
+    protected String uitvoerenGetString(String adres, Logger LOGGER) {
+        return uitvoerenGet(adres, LOGGER);
     }
 
     @Deprecated
-    protected String uitvoerenGet(String adres) {
+    protected String uitvoerenGet(String adres, Logger LOGGER) {
         LOGGER.info("Aanroepen via GET " + adres);
         System.out.println("Aanroepen via GET " + adres);
 
@@ -158,7 +151,7 @@ public abstract class AbstractClient<D> {
     }
 
     @Deprecated
-    protected <T> T uitvoerenGet(String adres, Class<T> clazz, String... args) {
+    protected <T> T uitvoerenGet(String adres, Class<T> clazz, Logger LOGGER, String... args) {
         LOGGER.debug("uitvoerenGet");
 
         Gson gson = builder.create();
@@ -191,7 +184,7 @@ public abstract class AbstractClient<D> {
     }
 
     @Deprecated
-    protected <T> List<T> uitvoerenGetLijst(String adres, Class<T> clazz, String... args) {
+    protected <T> List<T> uitvoerenGetLijst(String adres, Class<T> clazz, Logger LOGGER, String... args) {
         StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
