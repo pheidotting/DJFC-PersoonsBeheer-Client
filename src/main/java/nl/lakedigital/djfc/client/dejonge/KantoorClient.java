@@ -15,7 +15,7 @@ public class KantoorClient extends AbstractClient<Object> {
     private final String URL_LEES = basisUrl + "/rest/applicaties/kantoor/lees";
 
     public KantoorClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
     @Override
@@ -28,6 +28,6 @@ public class KantoorClient extends AbstractClient<Object> {
 
         System.out.println("Aanroepen " + URL_LEES);
 
-        return uitvoerenGet(URL_LEES, JsonKantoor.class, id.toString());
+        return uitvoerenGet(URL_LEES, JsonKantoor.class, LOGGER, id.toString());
     }
 }

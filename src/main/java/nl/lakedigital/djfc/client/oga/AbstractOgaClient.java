@@ -29,12 +29,8 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
     protected XmlMapper mapper = new XmlMapper();
 
 
-    public AbstractOgaClient(Logger LOGGER) {
-        super(LOGGER);
-    }
-
-    public AbstractOgaClient(String basisUrl, Logger LOGGER) {
-        super(basisUrl, LOGGER);
+    public AbstractOgaClient(String basisUrl) {
+        super(basisUrl);
     }
 
 
@@ -46,7 +42,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
 
     public abstract List<T> zoeken(String zoekterm);
 
-    protected D getXMLVoorLijstOGA(String uri, Class<D> clazz, String... args) throws IOException {
+    protected D getXMLVoorLijstOGA(String uri, Class<D> clazz, Logger LOGGER, String... args) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
@@ -75,7 +71,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         return response;
     }
 
-    protected D getXMLVoorLijstOGAZonderEncode(String uri, Class<D> clazz, String... args) throws IOException {
+    protected D getXMLVoorLijstOGAZonderEncode(String uri, Class<D> clazz, Logger LOGGER, String... args) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {
@@ -99,7 +95,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         return response;
     }
 
-    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId) {
+    protected String aanroepenUrlPost(String adres, Object object, Long ingelogdeGebruiker, String trackAndTraceId, Logger LOGGER) {
         Gson gson = builder.create();
 
         Client client = Client.create();
@@ -140,7 +136,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         webResource.accept("application/json").type("application/json").header("ingelogdeGebruiker", gebruiker).header("trackAndTraceId", trackAndTraceId).post();
     }
 
-    protected String uitvoerenGet(String adres) {
+    protected String uitvoerenGet(String adres, Logger LOGGER) {
         LOGGER.info("Aanroepen via GET " + basisUrl + adres);
         System.out.println("Aanroepen via GET " + basisUrl + adres);
 
@@ -160,7 +156,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         return ret;
     }
 
-    protected <T> List<T> uitvoerenGetLijst(String url, Class<T> clazz, String... args) {
+    protected <T> List<T> uitvoerenGetLijst(String url, Class<T> clazz, Logger LOGGER, String... args) {
         String adres = url;
         StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
@@ -193,7 +189,7 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
         return yourClassList;
     }
 
-    protected <T> List<T> uitvoerenGetLijstZonderEncoding(String adres, Class<T> clazz, String... args) {
+    protected <T> List<T> uitvoerenGetLijstZonderEncoding(String adres, Class<T> clazz, Logger LOGGER, String... args) {
         StringBuilder stringBuilder = new StringBuilder();
         if (args != null) {
             for (String arg : args) {

@@ -15,7 +15,7 @@ public class MedewerkerClient extends AbstractClient {
     private final String URL_LEES = basisUrl + "/rest/applicaties/medewerker/lees";
 
     public MedewerkerClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
     @Override
@@ -28,6 +28,6 @@ public class MedewerkerClient extends AbstractClient {
 
         System.out.println("Aanroepen " + URL_LEES);
 
-        return (JsonMedewerker) uitvoerenGet(URL_LEES, JsonMedewerker.class, id.toString());
+        return (JsonMedewerker) uitvoerenGet(URL_LEES, JsonMedewerker.class, LOGGER, id.toString());
     }
 }

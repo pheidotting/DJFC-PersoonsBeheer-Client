@@ -27,11 +27,7 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
     private final String URL_ZOEK_OP_SCHADENUMMER_MAATSCHAPPIJE = "/rest/schade/zoekOpSchadeNummerMaatschappij";
 
     public SchadeClient(String basisUrl) {
-        super(basisUrl, LOGGER);
-    }
-
-    public SchadeClient() {
-        super(LOGGER);
+        super(basisUrl);
     }
 
     @Override
@@ -42,23 +38,23 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
 
     @Deprecated
     public Long opslaan(JsonSchade jsonSchade, Long ingelogdeGebruiker, String trackAndTraceId) {
-        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, jsonSchade, ingelogdeGebruiker, trackAndTraceId));
+        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, jsonSchade, ingelogdeGebruiker, trackAndTraceId, LOGGER));
     }
 
     public List<JsonSchade> lijst(Long relatieId) {
-        return getXML(URL_LIJST, OpvragenSchadesResponse.class, false, String.valueOf(relatieId)).getSchades();
+        return getXML(URL_LIJST, OpvragenSchadesResponse.class, false, LOGGER, String.valueOf(relatieId)).getSchades();
     }
 
     public List<JsonSchade> lijstBijBedrijf(Long bedrijfId) {
-        return getXML(URL_LIJST_BEDRIJF, OpvragenSchadesResponse.class, false, String.valueOf(bedrijfId)).getSchades();
+        return getXML(URL_LIJST_BEDRIJF, OpvragenSchadesResponse.class, false, LOGGER, String.valueOf(bedrijfId)).getSchades();
     }
 
     public List<JsonSchade> zoekOpSchadeNummerMaatschappij(String schadeNummerMaatschappij) {
-        return getXML(URL_ZOEK_OP_SCHADENUMMER_MAATSCHAPPIJE, OpvragenSchadesResponse.class, false, schadeNummerMaatschappij).getSchades();
+        return getXML(URL_ZOEK_OP_SCHADENUMMER_MAATSCHAPPIJE, OpvragenSchadesResponse.class, false, LOGGER, schadeNummerMaatschappij).getSchades();
     }
 
     public JsonSchade lees(String id) {
-        return getXML(URL_LEES, OpvragenSchadesResponse.class, false, String.valueOf(id)).getSchades().get(0);
+        return getXML(URL_LEES, OpvragenSchadesResponse.class, false, LOGGER, String.valueOf(id)).getSchades().get(0);
     }
 
     @Deprecated
@@ -75,12 +71,8 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
     }
 
     private class SoortSchadeClient extends AbstractClient<OpvragenSoortSchadeResponse> {
-        public SoortSchadeClient() {
-            super(LOGGER);
-        }
-
         public SoortSchadeClient(String basisUrl) {
-            super(basisUrl, LOGGER);
+            super(basisUrl);
         }
 
         @Override
@@ -90,17 +82,14 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
         }
 
         public List<JsonSoortSchade> soortenSchade(String query) {
-            return getXML(URL_SOORTEN_SCHADE, OpvragenSoortSchadeResponse.class, false, query).getSoortSchade();
+            return getXML(URL_SOORTEN_SCHADE, OpvragenSoortSchadeResponse.class, false, LOGGER, query).getSoortSchade();
         }
     }
 
     private class StatusSchadeClient extends AbstractClient<OpvragenStatusSchadeResponse> {
-        public StatusSchadeClient() {
-            super(LOGGER);
-        }
 
         public StatusSchadeClient(String basisUrl) {
-            super(basisUrl, LOGGER);
+            super(basisUrl);
         }
 
         @Override
@@ -110,7 +99,7 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
         }
 
         public List<String> lijstStatusSchade() {
-            return getXML(URL_SOORTEN_SCHADE, OpvragenStatusSchadeResponse.class, false, "").getStatusSchade();
+            return getXML(URL_SOORTEN_SCHADE, OpvragenStatusSchadeResponse.class, false, LOGGER, "").getStatusSchade();
         }
     }
 }

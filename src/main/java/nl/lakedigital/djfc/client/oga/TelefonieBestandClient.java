@@ -20,12 +20,9 @@ public class TelefonieBestandClient extends AbstractClient {
     private final String URL_ALLES = "/rest/telefonie/recordings";
 
     public TelefonieBestandClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
-    public TelefonieBestandClient() {
-        super(LOGGER);
-    }
 
     @Override
     protected Type getTypeToken() {
@@ -36,7 +33,7 @@ public class TelefonieBestandClient extends AbstractClient {
     public Map<String, List<String>> getRecordingsAndVoicemails(List<String> telefoonnummers) {
         String nummers = "?telefoonnummers=" + join("&telefoonnummers=", telefoonnummers);
 
-        String result = uitvoerenGetString(URL_ALLES + nummers);
+        String result = uitvoerenGetString(URL_ALLES + nummers, LOGGER);
 
         LOGGER.debug("result {}", result);
 

@@ -24,12 +24,9 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public IdentificatieClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
-    public IdentificatieClient() {
-        super(LOGGER);
-    }
 
     @Override
     protected Type getTypeToken() {
@@ -37,7 +34,7 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
     }
 
     public Identificatie zoekIdentificatie(String soortEntiteit, Long entiteitId) {
-        List<Identificatie> lijst = getXML("/rest/identificatie/zoeken", ZoekIdentificatieResponse.class, false, soortEntiteit, String.valueOf(entiteitId)).getIdentificaties();
+        List<Identificatie> lijst = getXML("/rest/identificatie/zoeken", ZoekIdentificatieResponse.class, false, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getIdentificaties();
 
         if (!lijst.isEmpty()) {
             return lijst.get(0);
@@ -47,7 +44,7 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
 
     public Future<Identificatie> zoekIdentificatieMetFuture(String soortEntiteit, Long entiteitId) {
         return executor.submit(() -> {
-            List<Identificatie> lijst = getXML("/rest/identificatie/zoeken", ZoekIdentificatieResponse.class, false, soortEntiteit, String.valueOf(entiteitId)).getIdentificaties();
+            List<Identificatie> lijst = getXML("/rest/identificatie/zoeken", ZoekIdentificatieResponse.class, false, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getIdentificaties();
 
             if (!lijst.isEmpty()) {
                 return lijst.get(0);
@@ -58,7 +55,7 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
     }
 
     public Identificatie zoekIdentificatieCode(String identificatieCode) {
-        List<Identificatie> lijst = getXML("/rest/identificatie/zoekenOpCode", ZoekIdentificatieResponse.class, false, identificatieCode).getIdentificaties();
+        List<Identificatie> lijst = getXML("/rest/identificatie/zoekenOpCode", ZoekIdentificatieResponse.class, false, LOGGER, identificatieCode).getIdentificaties();
 
         if (!lijst.isEmpty()) {
             return lijst.get(0);
@@ -76,12 +73,12 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
 
         LOGGER.debug(idsString);
 
-        List<Identificatie> lijst = getXML("/rest/identificatie/zoekenMeerdere", ZoekIdentificatieResponse.class, false, idsString).getIdentificaties();
+        List<Identificatie> lijst = getXML("/rest/identificatie/zoekenMeerdere", ZoekIdentificatieResponse.class, false, LOGGER, idsString).getIdentificaties();
 
         return lijst;
     }
 
     public nl.lakedigital.djfc.commons.json.Identificatie opslaan(EntiteitenOpgeslagenRequest entiteitenOpgeslagenRequest) {
-        return new Gson().fromJson(aanroepenUrlPost("/rest/identificatie/opslaan", entiteitenOpgeslagenRequest, 0L, ""), nl.lakedigital.djfc.commons.json.Identificatie.class);
+        return new Gson().fromJson(aanroepenUrlPost("/rest/identificatie/opslaan", entiteitenOpgeslagenRequest, 0L, "", LOGGER), nl.lakedigital.djfc.commons.json.Identificatie.class);
     }
 }

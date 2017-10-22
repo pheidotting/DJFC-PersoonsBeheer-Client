@@ -32,12 +32,9 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
     private final String URL_ZOEK_OP_PLAATS = "/rest/adres/zoekOpPlaats";
 
     public AdresClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
-    public AdresClient() {
-        super(LOGGER);
-    }
 
     @Override
     protected Type getTypeToken() {
@@ -53,7 +50,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         List<JsonAdres> result;
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenAdressenResponse.class, zoekterm).getAdressen();
+            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenAdressenResponse.class, LOGGER, zoekterm).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
@@ -67,7 +64,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
 
         OpvragenAdressenResponse opvragenAdressenResponse;
         try {
-            opvragenAdressenResponse = getXMLVoorLijstOGA(basisUrl + URL_LEES, OpvragenAdressenResponse.class, String.valueOf(id));
+            opvragenAdressenResponse = getXMLVoorLijstOGA(basisUrl + URL_LEES, OpvragenAdressenResponse.class, LOGGER, String.valueOf(id));
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
@@ -80,7 +77,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         List<JsonAdres> result = newArrayList();
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenAdressenResponse.class, soortEntiteit, String.valueOf(entiteitId)).getAdressen();
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenAdressenResponse.class, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
@@ -91,7 +88,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
     public String opslaan(List<JsonAdres> jsonAdressen, Long ingelogdeGebruiker, String trackAndTraceId) {
         LOGGER.debug("Aanroepen {}", URL_OPSLAAN);
 
-        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, ingelogdeGebruiker, trackAndTraceId);
+        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, ingelogdeGebruiker, trackAndTraceId, LOGGER);
     }
 
 
@@ -107,7 +104,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         List<JsonAdres> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_ADRES_BIJ_POSTCODE, OpvragenAdressenResponse.class, postcode, huisnummer, toggleString).getAdressen();
+            result = getXMLVoorLijstOGAZonderEncode(basisUrl + URL_ADRES_BIJ_POSTCODE, OpvragenAdressenResponse.class, LOGGER, postcode, huisnummer, toggleString).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + basisUrl + URL_ADRES_BIJ_POSTCODE, e);
         }
@@ -123,7 +120,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         List<JsonAdres> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class).getAdressen();
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class, LOGGER).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + url, e);
         }
@@ -137,7 +134,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         List<JsonAdres> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class,zoekTerm).getAdressen();
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class, LOGGER, zoekTerm).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + url, e);
         }
@@ -150,7 +147,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         List<JsonAdres> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class,zoekTerm).getAdressen();
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class, LOGGER, zoekTerm).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + url, e);
         }
@@ -163,7 +160,7 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         List<JsonAdres> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class,zoekTerm).getAdressen();
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenAdressenResponse.class, LOGGER, zoekTerm).getAdressen();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + url, e);
         }

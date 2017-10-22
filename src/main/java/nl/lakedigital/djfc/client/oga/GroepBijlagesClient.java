@@ -20,12 +20,9 @@ public class GroepBijlagesClient extends AbstractOgaClient<JsonBijlage, Opvragen
     private final String URL_OPSLAAN_GROEP = "/rest/bijlage/opslaanGroep";
 
     public GroepBijlagesClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
-    public GroepBijlagesClient() {
-        super(LOGGER);
-    }
 
     @Override
     protected Type getTypeToken() {
@@ -39,7 +36,7 @@ public class GroepBijlagesClient extends AbstractOgaClient<JsonBijlage, Opvragen
         List<JsonGroepBijlages> result;
 
         try {
-            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenGroepBijlagesResponse.class, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
+            result = getXMLVoorLijstOGAZonderEncode(url, OpvragenGroepBijlagesResponse.class, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getBijlages();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + url, e);
         }
@@ -48,7 +45,7 @@ public class GroepBijlagesClient extends AbstractOgaClient<JsonBijlage, Opvragen
     }
 
     public String opslaan(JsonGroepBijlages groepBijlages, Long ingelogdeGebruiker, String trackAndTraceId) {
-        return aanroepenUrlPost(URL_OPSLAAN_GROEP, groepBijlages, ingelogdeGebruiker, trackAndTraceId);
+        return aanroepenUrlPost(URL_OPSLAAN_GROEP, groepBijlages, ingelogdeGebruiker, trackAndTraceId, LOGGER);
     }
 
     public void verwijder(String soortEntiteit, Long entiteitId, Long ingelogdeGebruiker, String trackAndTraceId) {

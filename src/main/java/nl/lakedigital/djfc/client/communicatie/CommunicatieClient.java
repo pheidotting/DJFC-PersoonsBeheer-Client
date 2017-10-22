@@ -32,11 +32,7 @@ public class CommunicatieClient extends AbstractClient {
     private final String URL_LEES = basisUrl + "/rest/communicatieproduct/lees";
 
     public CommunicatieClient(String basisUrl) {
-        super(basisUrl, LOGGER);
-    }
-
-    public CommunicatieClient() {
-        super(LOGGER);
+        super(basisUrl);
     }
 
     @Override
@@ -52,7 +48,7 @@ public class CommunicatieClient extends AbstractClient {
     public Long nieuwCommunicatieProduct(OpslaanCommunicatieProduct opslaanCommunicatieProduct, Long ingelogdeGebruiker, String trackAndTraceId) {
         LOGGER.debug("Opslaan {}", ReflectionToStringBuilder.toString(opslaanCommunicatieProduct, ToStringStyle.SHORT_PREFIX_STYLE));
 
-        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, opslaanCommunicatieProduct, ingelogdeGebruiker, trackAndTraceId));
+        return Long.valueOf(aanroepenUrlPost(URL_OPSLAAN, opslaanCommunicatieProduct, ingelogdeGebruiker, trackAndTraceId, LOGGER));
     }
 
     public void versturen(Long id, Long ingelogdeGebruiker, String trackAndTraceId) {

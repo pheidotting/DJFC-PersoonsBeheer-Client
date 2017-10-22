@@ -21,12 +21,9 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
     private final String URL_ZOEKEN = "/rest/telefoonnummer/zoeken";
 
     public TelefoonnummerClient(String basisUrl) {
-        super(basisUrl, LOGGER);
+        super(basisUrl);
     }
 
-    public TelefoonnummerClient() {
-        super(LOGGER);
-    }
 
     @Override
     protected Type getTypeToken() {
@@ -42,7 +39,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
         List<JsonTelefoonnummer> result;
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenTelefoonnummersResponse.class, zoekterm).getTelefoonnummers();
+            result = getXMLVoorLijstOGA(basisUrl + URL_ZOEKEN, OpvragenTelefoonnummersResponse.class, LOGGER, zoekterm).getTelefoonnummers();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_ZOEKEN, e);
         }
@@ -57,7 +54,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
         List<JsonTelefoonnummer> result;
 
         try {
-            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenTelefoonnummersResponse.class, soortEntiteit, String.valueOf(entiteitId)).getTelefoonnummers();
+            result = getXMLVoorLijstOGA(basisUrl + URL_LIJST, OpvragenTelefoonnummersResponse.class, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getTelefoonnummers();
         } catch (IOException e) {
             throw new LeesFoutException("Fout bij lezen " + URL_LIJST, e);
         }
@@ -70,7 +67,7 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
 
         System.out.println("Aanroepen " + URL_OPSLAAN);
 
-        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, ingelogdeGebruiker, trackAndTraceId);
+        return aanroepenUrlPost(URL_OPSLAAN, jsonAdressen, ingelogdeGebruiker, trackAndTraceId, LOGGER);
     }
 
     @Override
