@@ -24,6 +24,9 @@ public abstract class AbstractClient<D> {
     protected String basisUrl;
     protected XmlMapper mapper = new XmlMapper();
 
+    public AbstractClient() {
+    }
+
     public AbstractClient(String basisUrl) {
         this.basisUrl = basisUrl;
     }

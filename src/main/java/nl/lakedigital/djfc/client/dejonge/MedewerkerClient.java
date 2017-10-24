@@ -18,6 +18,9 @@ public class MedewerkerClient extends AbstractClient {
         super(basisUrl);
     }
 
+    public MedewerkerClient() {
+    }
+
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonMedewerker>>() {

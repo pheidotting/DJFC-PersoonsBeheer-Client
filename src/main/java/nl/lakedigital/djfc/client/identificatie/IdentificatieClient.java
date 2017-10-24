@@ -27,6 +27,8 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
         super(basisUrl);
     }
 
+    public IdentificatieClient() {
+    }
 
     @Override
     protected Type getTypeToken() {

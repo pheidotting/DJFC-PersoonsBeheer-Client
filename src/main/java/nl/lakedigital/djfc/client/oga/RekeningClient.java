@@ -26,6 +26,8 @@ public class RekeningClient extends AbstractOgaClient<JsonRekeningNummer, Opvrag
         super(basisUrl);
     }
 
+    public RekeningClient() {
+    }
 
     @Override
     protected Type getTypeToken() {

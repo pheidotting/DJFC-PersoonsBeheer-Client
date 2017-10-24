@@ -23,6 +23,8 @@ public class GroepBijlagesClient extends AbstractOgaClient<JsonBijlage, Opvragen
         super(basisUrl);
     }
 
+    public GroepBijlagesClient() {
+    }
 
     @Override
     protected Type getTypeToken() {

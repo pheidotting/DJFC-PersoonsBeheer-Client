@@ -29,6 +29,8 @@ public class OpmerkingClient extends AbstractOgaClient<JsonOpmerking, OpvragenOp
         super(basisUrl);
     }
 
+    public OpmerkingClient() {
+    }
 
     @Override
     protected Type getTypeToken() {

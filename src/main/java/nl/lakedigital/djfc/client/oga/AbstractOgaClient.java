@@ -28,11 +28,12 @@ public abstract class AbstractOgaClient<T extends AbstracteJsonEntiteitMetSoortE
     protected Gson gson = new Gson();
     protected XmlMapper mapper = new XmlMapper();
 
-
     public AbstractOgaClient(String basisUrl) {
         super(basisUrl);
     }
 
+    public AbstractOgaClient() {
+    }
 
     public abstract List<T> lijst(String soortEntiteit, Long entiteitId);
 

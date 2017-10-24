@@ -35,6 +35,8 @@ public class AdresClient extends AbstractOgaClient<JsonAdres, OpvragenAdressenRe
         super(basisUrl);
     }
 
+    public AdresClient() {
+    }
 
     @Override
     protected Type getTypeToken() {
