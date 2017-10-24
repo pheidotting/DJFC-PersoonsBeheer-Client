@@ -44,6 +44,7 @@ public class IdentificatieClient extends AbstractClient<ZoekIdentificatieRespons
         return null;
     }
 
+    @Deprecated
     public Future<Identificatie> zoekIdentificatieMetFuture(String soortEntiteit, Long entiteitId) {
         return executor.submit(() -> {
             List<Identificatie> lijst = getXML("/rest/identificatie/zoeken", ZoekIdentificatieResponse.class, false, LOGGER, soortEntiteit, String.valueOf(entiteitId)).getIdentificaties();
