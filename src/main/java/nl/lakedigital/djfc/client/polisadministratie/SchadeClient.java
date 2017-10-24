@@ -30,6 +30,9 @@ public class SchadeClient extends AbstractClient<OpvragenSchadesResponse> {
         super(basisUrl);
     }
 
+    public SchadeClient() {
+    }
+
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonSchade>>() {

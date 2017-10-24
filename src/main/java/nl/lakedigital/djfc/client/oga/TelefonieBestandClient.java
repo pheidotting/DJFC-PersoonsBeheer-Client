@@ -23,6 +23,8 @@ public class TelefonieBestandClient extends AbstractClient {
         super(basisUrl);
     }
 
+    public TelefonieBestandClient() {
+    }
 
     @Override
     protected Type getTypeToken() {

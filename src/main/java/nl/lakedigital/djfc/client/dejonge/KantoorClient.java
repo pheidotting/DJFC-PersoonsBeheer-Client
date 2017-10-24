@@ -18,6 +18,9 @@ public class KantoorClient extends AbstractClient<Object> {
         super(basisUrl);
     }
 
+    public KantoorClient() {
+    }
+
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonKantoor>>() {

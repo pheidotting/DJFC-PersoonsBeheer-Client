@@ -26,6 +26,8 @@ public class PolisClient extends AbstractClient {
         super(basisUrl);
     }
 
+    public PolisClient() {
+    }
 
     public List<String> alleParticulierePolisSoorten() {
         return ((OpvragenPolisSoortenResponse) getXML(URL_ALLE_PARTICULIERE_POLIS_SOORTEN, OpvragenPolisSoortenResponse.class, false, LOGGER)).getPolisSoorten();

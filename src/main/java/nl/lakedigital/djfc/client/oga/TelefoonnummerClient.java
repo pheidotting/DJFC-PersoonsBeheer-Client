@@ -24,6 +24,8 @@ public class TelefoonnummerClient extends AbstractOgaClient<JsonTelefoonnummer, 
         super(basisUrl);
     }
 
+    public TelefoonnummerClient() {
+    }
 
     @Override
     protected Type getTypeToken() {

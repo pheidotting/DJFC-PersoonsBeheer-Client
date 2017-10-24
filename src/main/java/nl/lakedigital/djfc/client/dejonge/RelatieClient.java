@@ -21,6 +21,9 @@ public class RelatieClient extends AbstractClient<Object> {
         super(basisUrl);
     }
 
+    public RelatieClient() {
+    }
+
     @Override
     protected Type getTypeToken() {
         return new TypeToken<ArrayList<JsonRelatie>>() {

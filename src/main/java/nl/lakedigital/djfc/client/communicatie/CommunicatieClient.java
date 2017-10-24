@@ -31,6 +31,9 @@ public class CommunicatieClient extends AbstractClient {
     private final String URL_MARKEER_GELEZEN = basisUrl + "/rest/communicatieproduct/markeerAlsGelezen";
     private final String URL_LEES = basisUrl + "/rest/communicatieproduct/lees";
 
+    public CommunicatieClient() {
+    }
+
     public CommunicatieClient(String basisUrl) {
         super(basisUrl);
     }
